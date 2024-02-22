@@ -2,24 +2,14 @@ import { useEffect, useState } from "react";
 import "./styles/App.css";
 import SurvivorSelection from "./components/SurvivorSelection";
 import urls from "./utilities/urls"
+import { Survivor, UserSelection } from "./utilities/types";
 
-export interface Items {
-    id: string;
-    itemName: string;
-    rarity: string;
-    description: string;
-    stackType: string;
-}
 
-export interface Survivor {
-    id: string;
-    name: string;
-    imageLink: string;
-}
 
 function App() {
-    const [survivorList, setsurvivorList] = useState<Survivor[]>([]);
-    const [selectedSurvivor, setSelectedSurvivor] = useState<Survivor>({} as Survivor);
+    const [survivorList, setsurvivorList] = useState<Survivor[]>([]); //*to store list of survivors from API pull
+    const [selectedSurvivor, setSelectedSurvivor] = useState<Survivor>({} as Survivor); //*to store survivor selected by user
+    const [userSelection, setUserSelection] = useState<UserSelection>({} as UserSelection)
 
     useEffect(() => {
       const fetchSurvivors = async () => {
@@ -36,7 +26,11 @@ function App() {
         }
       };
       fetchSurvivors()
+      ;
+      
     }, [])
+
+    console.log(survivorList)
 
     return <>
       <SurvivorSelection selectedSurvivor={selectedSurvivor} survivorList={survivorList} setSelectedSurvivor={setSelectedSurvivor}/>
