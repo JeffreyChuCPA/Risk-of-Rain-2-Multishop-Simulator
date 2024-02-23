@@ -3,7 +3,7 @@ import "./styles/App.css";
 import SurvivorSelection from "./components/SurvivorSelection";
 import urls from "./utilities/urls"
 import { Survivor, UserSelection } from "./utilities/types";
-
+import Instructions from "./components/Instructions";
 
 
 function App() {
@@ -17,7 +17,12 @@ function App() {
           const response = await fetch(urls.survivorsURL);
           if (response.ok) {
             const data = await response.json();
-            setsurvivorList(data)
+            const survivorData: Survivor[] = data.map( (survivor: any) => ({
+              id: survivor._id,
+              name: survivor.survivorName,
+              imageLink: survivor.survivorImage
+            }))
+            setsurvivorList(survivorData)
           } else {
             throw new Error("Failed to retrieve survivors")
           }
@@ -29,11 +34,12 @@ function App() {
       ;
       
     }, [])
-
-    console.log(survivorList)
+    
+    console.log(userSelection)
 
     return <>
-      <SurvivorSelection selectedSurvivor={selectedSurvivor} survivorList={survivorList} setSelectedSurvivor={setSelectedSurvivor}/>
+      <Instructions />
+      <SurvivorSelection setUserSelection={setUserSelection} selectedSurvivor={selectedSurvivor} survivorList={survivorList} setSelectedSurvivor={setSelectedSurvivor}/>
     </>;
 }
 
