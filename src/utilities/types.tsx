@@ -1,6 +1,6 @@
 export enum itemRarities {
   common = "Common",
-  unCommon = "Uncommon",
+  uncommon = "Uncommon",
   legendary = "Legendary"
 }
 
