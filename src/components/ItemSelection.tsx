@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Items, itemRarities } from "../utilities/types"
 import urls from "../utilities/urls"
+import MultiShopSelection from "./MultiShopSelection"
+
 
 export type AllItems = {
   [itemRarity in itemRarities]: {
@@ -8,7 +10,12 @@ export type AllItems = {
   }
 }
 
-const ItemSelection = () => {
+const ItemSelection: React.FC<{
+  handleItemSelection: (item: Items) => void;
+  numberOfItemsSelected: number
+}> = ({
+  handleItemSelection, numberOfItemsSelected
+}) => {
   const [allItems, setAllItems] = useState<AllItems>({
     Common: {items: []},
     Uncommon: {items: []},
@@ -42,13 +49,14 @@ const ItemSelection = () => {
 
         // Await all promises and then combine results into the allItems state
         const results = await Promise.all(fetchPromises);
-        console.log(results);
         
         setAllItems({
           Common: {items: results[0].items},
           Uncommon: {items: results[1].items},
           Legendary: {items: results[2].items},
         });
+        
+        
       } catch (error) {
         console.error("Error retrieving items", error);
       }
@@ -57,10 +65,13 @@ const ItemSelection = () => {
     fetchItems();
   }, [])
 
-  console.log(allItems);
-
   return (
-    <div>ItemSelection</div>
+    <>
+      <div>ItemSelection</div>
+      {allItems.Common.items.length > 0 ? <MultiShopSelection allItems={allItems} handleItemSelection={handleItemSelection} numberOfItemsSelected={numberOfItemsSelected} /> : null}
+      {console.log(allItems)}
+    </>
+
   )
 }
 

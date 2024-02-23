@@ -1,29 +1,42 @@
 import { useState } from "react";
 import "./styles/App.css";
 import SurvivorSelection from "./components/SurvivorSelection";
-import { Survivor, UserSelection } from "./utilities/types";
+import { Items, Survivor, UserSelection } from "./utilities/types";
 import Instructions from "./components/Instructions";
 import ItemSelection from "./components/ItemSelection";
 
 //app level: rendering the individual steps of the flow and nothing else
 function App() {
   const [userSelection, setUserSelection] = useState<UserSelection>(
-    {} as UserSelection
+    {userID: 0,
+    userSurvivor: {} as Survivor,
+    userItems: []
+  }
   ); //*to store survivor selected by user, user id, and items selected by user
+
+  const [numberOfItemsSelected, setNumberOfItemsSelected] = useState<number>(0)
 
   console.log(userSelection);
 
   const handleSurvivorSelection = (survivor: Survivor) => {
     setUserSelection((prevUserSelection) => ({
       ...prevUserSelection,
-      id: Date.now(),
+      userID: Date.now(),
       userSurvivor: survivor
     }));
   };
 
+  const handleItemSelection = (item: Items) => {
+    setUserSelection((prevUserSelection) => ({
+      ...prevUserSelection,
+      userItems: [...prevUserSelection.userItems, item]
+    }))
+    setNumberOfItemsSelected(prev => prev + 1)
+  };
+
   return (
     <>
-      {!userSelection.userSurvivor ? (
+      {userSelection.userID === 0 ? (
         <>
           {" "}
           <Instructions />{" "}
@@ -31,7 +44,7 @@ function App() {
             handleSurvivorSelection={handleSurvivorSelection}
           />
         </>
-      ) : <ItemSelection/>}
+      ) : <ItemSelection handleItemSelection={handleItemSelection} numberOfItemsSelected={numberOfItemsSelected}/>}
     </>
   );
 }
