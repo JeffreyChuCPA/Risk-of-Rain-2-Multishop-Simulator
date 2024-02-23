@@ -1,10 +1,10 @@
-enum itemRarities {
+export enum itemRarities {
   common = "Common",
   unCommon = "Uncommon",
   legendary = "Legendary"
 }
 
-enum stackTypes {
+export enum stackTypes {
   linear = "Linear",
   hyperbolic = "Hyperbolic",
   none = "None",
