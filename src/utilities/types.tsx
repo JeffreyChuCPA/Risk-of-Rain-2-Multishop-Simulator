@@ -1,9 +1,23 @@
+enum itemRarities {
+  common = "Common",
+  unCommon = "Uncommon",
+  legendary = "Legendary"
+}
+
+enum stackTypes {
+  linear = "Linear",
+  hyperbolic = "Hyperbolic",
+  none = "None",
+  special = "Special"
+}
+
 export interface Items {
   id: string;
   itemName: string;
-  rarity: string;
+  rarity: keyof typeof itemRarities;
   description: string;
-  stackType: string;
+  stackType: keyof typeof stackTypes;
+  itemImage: string;
 }
 
 export interface Survivor {

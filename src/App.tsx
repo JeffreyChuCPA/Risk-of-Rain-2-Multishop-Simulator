@@ -7,9 +7,9 @@ import Instructions from "./components/Instructions";
 
 
 function App() {
-    const [survivorList, setsurvivorList] = useState<Survivor[]>([]); //*to store list of survivors from API pull
-    const [selectedSurvivor, setSelectedSurvivor] = useState<Survivor>({} as Survivor); //*to store survivor selected by user
-    const [userSelection, setUserSelection] = useState<UserSelection>({} as UserSelection)
+    const [survivorList, setSurvivorList] = useState<Survivor[]>([]); //*to store list of survivors from API pull
+    // const [selectedSurvivor, setSelectedSurvivor] = useState<Survivor>({} as Survivor); //*to store survivor selected by user
+    const [userSelection, setUserSelection] = useState<UserSelection>({} as UserSelection) //*to store survivor selected by user, user id, and items selected by user
 
     useEffect(() => {
       const fetchSurvivors = async () => {
@@ -17,12 +17,12 @@ function App() {
           const response = await fetch(urls.survivorsURL);
           if (response.ok) {
             const data = await response.json();
-            const survivorData: Survivor[] = data.map( (survivor: any) => ({
+            const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string}) => ({
               id: survivor._id,
               name: survivor.survivorName,
               imageLink: survivor.survivorImage
             }))
-            setsurvivorList(survivorData)
+            setSurvivorList(survivorData)
           } else {
             throw new Error("Failed to retrieve survivors")
           }
@@ -37,9 +37,17 @@ function App() {
     
     console.log(userSelection)
 
+    const handleSurvivorSelection = (survivor: Survivor) => {
+      setUserSelection((prevUserSelection) => ({
+        ...prevUserSelection,
+        id: Date.now(),
+        userSurvivor: survivor
+      }));
+    };
+
     return <>
       <Instructions />
-      <SurvivorSelection setUserSelection={setUserSelection} selectedSurvivor={selectedSurvivor} survivorList={survivorList} setSelectedSurvivor={setSelectedSurvivor}/>
+      <SurvivorSelection handleSurvivorSelection={handleSurvivorSelection} survivorList={survivorList} />
     </>;
 }
 
