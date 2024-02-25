@@ -14,8 +14,6 @@ function App() {
   }
   ); //*to store survivor selected by user, user id, and items selected by user
 
-  const [numberOfItemsSelected, setNumberOfItemsSelected] = useState<number>(0)
-
   console.log(userSelection);
 
   const handleSurvivorSelection = (survivor: Survivor) => {
@@ -31,7 +29,6 @@ function App() {
       ...prevUserSelection,
       userItems: [...prevUserSelection.userItems, item]
     }))
-    setNumberOfItemsSelected(prev => prev + 1)
   };
 
   return (
@@ -44,7 +41,7 @@ function App() {
             handleSurvivorSelection={handleSurvivorSelection}
           />
         </>
-      ) : <ItemSelection handleItemSelection={handleItemSelection} numberOfItemsSelected={numberOfItemsSelected}/>}
+      ) : <ItemSelection handleItemSelection={handleItemSelection} userSelection={userSelection}/>}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Items, itemRarities } from "../utilities/types"
+import { Items, UserSelection, itemRarities } from "../utilities/types"
 import urls from "../utilities/urls"
 import MultiShopSelection from "./MultiShopSelection"
 
@@ -12,9 +12,9 @@ export type AllItems = {
 
 const ItemSelection: React.FC<{
   handleItemSelection: (item: Items) => void;
-  numberOfItemsSelected: number
+  userSelection: UserSelection
 }> = ({
-  handleItemSelection, numberOfItemsSelected
+  handleItemSelection, userSelection
 }) => {
   const [allItems, setAllItems] = useState<AllItems>({
     Common: {items: []},
@@ -68,7 +68,7 @@ const ItemSelection: React.FC<{
   return (
     <>
       <div>ItemSelection</div>
-      {allItems.Common.items.length > 0 ? <MultiShopSelection allItems={allItems} handleItemSelection={handleItemSelection} numberOfItemsSelected={numberOfItemsSelected} /> : null}
+      {allItems.Common.items.length > 0 ? <MultiShopSelection allItems={allItems} handleItemSelection={handleItemSelection} userSelection={userSelection} /> : null}
       {console.log(allItems)}
     </>
 
