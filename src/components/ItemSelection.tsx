@@ -69,7 +69,7 @@ const ItemSelection: React.FC<{
 
   return (
     <>
-      <div>ItemSelection</div>
+      <div className="items-selected">{userSelection.userItems.map(item => <img className="item-image selected" src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} />)}</div>
       {allItems.Common.items.length > 0 ? <MultiShopSelection allItems={allItems} handleItemSelection={handleItemSelection} userSelection={userSelection} /> : null}
       {console.log(allItems)}
     </>

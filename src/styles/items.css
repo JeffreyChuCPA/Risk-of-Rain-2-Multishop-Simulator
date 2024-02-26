@@ -1,8 +1,73 @@
 .item-image {
-  width: 60px;
-  border: 1px solid #797876;
-  border-radius: 1px;
+  width: 80%;
   padding: 2px;
   margin: 3px;
 }
 
+.items-selected {
+  border: 1px solid #CAC686;
+  text-align: center;
+  height: 10vh;
+  background-color: #242424;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 20px 30px 80px 30px;
+  padding: 10px;
+}
+
+.selected {
+  width: 9%;
+  padding: 5px;
+}
+
+.multishop-container {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.multishop {
+  width: 20vw;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 20px;
+  background-color: #242424;
+}
+
+.multishop-top {
+  width: 30vw;
+  height:15%;
+  position: absolute;
+  top: 0%;
+  border: 1px solid blue;
+  max-width: 278px;
+  background-color: blue;
+}
+
+.multishop-cap {
+  width: 30vw;
+  height:15%;
+  position: absolute;
+  top: -4%;
+  border: 1px solid blue;
+  border-radius: 30%;
+  overflow: hidden;
+  max-width: 278px;
+  background-color: blue;
+}
+
+.multishop-bottom {
+  width: 30vw;
+  height: 10%;
+  position: absolute;
+  bottom: 0%;
+  border: 1px solid blue;
+  border-radius: 0 0 30px 30px;
+  max-width: 278px;
+  background-color: blue;
+}

@@ -48,7 +48,7 @@ const MultiShopSelection: React.FC<{allItems: AllItems, handleItemSelection: (it
 
   return (
     <div>
-      {multiShop.length > 0 ? (<div>{multiShop.map((item, index) => <img className="item-image" key={`${item.id}+${index}`} src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} onClick={() => handleItemSelection(item)}/>)}</div>) : null}
+      {multiShop.length > 0 ? (<div className="multishop-container">{multiShop.map((item, index) => <div className="multishop"> <div className="multishop-top"></div><div className="multishop-cap"></div><img className="item-image" key={`${item.id}+${index}`} src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} onClick={() => handleItemSelection(item)}/><div className="multishop-bottom"></div></div>)}</div>) : null}
     </div>
     
   )
