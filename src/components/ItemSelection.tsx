@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Items, UserSelection, itemRarities } from "../utilities/types"
+import {removedItems} from "../utilities/itemsToRemove"
 import urls from "../utilities/urls"
 import MultiShopSelection from "./MultiShopSelection"
 
@@ -23,9 +24,10 @@ const ItemSelection: React.FC<{
   })
 
   useEffect(() => {
+
     const fetchItems = async () => {
 
-      const itemURLS: {url: string}[] = [{url: urls.commonItemsURL}, {url: urls.unCommonItemsURL}, {url: urls.legendaryItemsURL}];
+    const itemURLS: {url: string}[] = [{url: urls.commonItemsURL}, {url: urls.unCommonItemsURL}, {url: urls.legendaryItemsURL}];
 
       try {
         // Use Promise.all to fetch all URLs simultaneously
@@ -43,7 +45,7 @@ const ItemSelection: React.FC<{
             description: item.description,
             stackType: item.stackType,
             itemImage: item.itemImage,
-          })),
+          })).filter((item: Items) => !removedItems.includes(item.itemName)),
         };
         });
 

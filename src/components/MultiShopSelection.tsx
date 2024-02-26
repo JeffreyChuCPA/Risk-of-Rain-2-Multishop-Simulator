@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {AllItems} from "./ItemSelection"
 import { Items, UserSelection, itemRarities } from "../utilities/types"
+import "../styles/items.css";
 
 const MultiShopSelection: React.FC<{allItems: AllItems, handleItemSelection: (item: Items) => void , userSelection: UserSelection}> = ({allItems, handleItemSelection, userSelection}) => {
 
@@ -47,7 +48,7 @@ const MultiShopSelection: React.FC<{allItems: AllItems, handleItemSelection: (it
 
   return (
     <div>
-      {multiShop.length > 0 ? (<div>{multiShop.map((item, index) => <img key={`${item.id}+${index}`} src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} onClick={() => handleItemSelection(item)}/>)}</div>) : null}
+      {multiShop.length > 0 ? (<div>{multiShop.map((item, index) => <img className="item-image" key={`${item.id}+${index}`} src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} onClick={() => handleItemSelection(item)}/>)}</div>) : null}
     </div>
     
   )
