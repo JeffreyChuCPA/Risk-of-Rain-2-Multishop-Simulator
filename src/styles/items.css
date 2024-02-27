@@ -16,6 +16,11 @@
 
 .selected {
   width: 5%;
+  margin: 0 10px;
+}
+
+span {
+  font-size: calc(15px + 0.390625vw);;
 }
 
 .container {

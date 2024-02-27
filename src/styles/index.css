@@ -1,4 +1,10 @@
 :root {
   background-color: black;
-  color: white
+  color: white;
+  font-family: "Bombardier";
+}
+
+@font-face {
+  font-family: "Bombardier";
+  src: local("Bombardier-Regular"), url("../fonts/Bombardier-Regular.ttf")
 }
