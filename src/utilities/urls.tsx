@@ -1,8 +1,10 @@
+const baseURL = 'https://riskofrain2api.herokuapp.com/api'
+
 const urls: {[key: string]: string} = {
-  survivorsURL: 'https://riskofrain2api.herokuapp.com/api/survivor/everySurvivor',
-  commonItemsURL: 'https://riskofrain2api.herokuapp.com/api/commonItems',
-  unCommonItemsURL: 'https://riskofrain2api.herokuapp.com/api/uncommonItems',
-  legendaryItemsURL: 'https://riskofrain2api.herokuapp.com/api/legendaryItems'
+  survivorsURL: `${baseURL}/survivor/everySurvivor`,
+  commonItemsURL: `${baseURL}/commonItems`,
+  unCommonItemsURL: `${baseURL}/uncommonItems`,
+  legendaryItemsURL: `${baseURL}/legendaryItems`
 }
 
 export default urls

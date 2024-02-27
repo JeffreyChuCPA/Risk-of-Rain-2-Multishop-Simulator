@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AllItems } from "./ItemSelection";
 import { Items, UserSelection, itemRarities } from "../utilities/types";
 import "../styles/items.css";
+import { isEmpty } from "lodash";
 
 const MultiShopSelection: React.FC<{
   allItems: AllItems;
@@ -50,7 +51,7 @@ const MultiShopSelection: React.FC<{
 
   return (
     <div className="container">
-      {multiShop.length > 0 ? (
+      {!isEmpty(multiShop) && (
         <div className="multishop-container">
           {multiShop.map((item, index) => (
             <div className="multishop">
@@ -69,7 +70,7 @@ const MultiShopSelection: React.FC<{
             </div>
           ))}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      {userSelection.userID === 0 ? (
+      {(userSelection.userSurvivor.id === undefined) ? (
         <>
           {" "}
           <Instructions />{" "}
