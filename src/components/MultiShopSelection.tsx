@@ -8,7 +8,8 @@ const MultiShopSelection: React.FC<{
   allItems: AllItems;
   handleItemSelection: (item: Items) => void;
   userSelection: UserSelection;
-}> = ({ allItems, handleItemSelection, userSelection }) => {
+  setItemStack: React.Dispatch<React.SetStateAction<Record<string, number>>>
+}> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
   const [multiShop, setMultiShop] = useState<Items[]>([]);
 
   useEffect(() => {
@@ -43,10 +44,24 @@ const MultiShopSelection: React.FC<{
     userSelection.userItems.length < 15
       ? setMultiShop(populateMultiShop(allItems))
       : setMultiShop([]);
+
+    const updateUserItemStack = (userSelection: UserSelection): Record<string, number> => {
+      const newItemStack: Record<string, number> = {};
+
+      userSelection.userItems.forEach(item => {
+        newItemStack[item.itemName] = (newItemStack[item.itemName] || 0) + 1;
+      })
+
+      return newItemStack
+    }
+
+    setItemStack(updateUserItemStack(userSelection))
+    
   }, [allItems, userSelection]);
 
   useEffect(() => {
     console.log(multiShop);
+    
   }, [multiShop]);
 
   return (
