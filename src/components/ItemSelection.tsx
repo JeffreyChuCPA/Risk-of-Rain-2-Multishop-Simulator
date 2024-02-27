@@ -91,12 +91,14 @@ const ItemSelection: React.FC<{
             />
           ) : (
             <>
+            
               <img
                 className="item-image selected"
                 src={`public/assets/${item.itemStackRarity[0].rarity}/${item.item}.webp`}
                 alt={item.item}
               />{" "}
               <span>x{itemStack[item.item]}</span>
+              
             </>
           )
         )}
