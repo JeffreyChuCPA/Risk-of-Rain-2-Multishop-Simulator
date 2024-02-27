@@ -1,4 +1,4 @@
-img {
+.survivor-image {
   width: 60px;
   border: 1px solid #797876;
   border-radius: 1px;
@@ -12,7 +12,7 @@ img {
   justify-content: center;
 }
 
-img:hover {
+.survivor-image:hover {
   outline: 1px solid #CAC686;
   transform: scale(1.2);
 }

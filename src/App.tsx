@@ -1,29 +1,49 @@
 import { useState } from "react";
 import "./styles/App.css";
 import SurvivorSelection from "./components/SurvivorSelection";
-import { Survivor, UserSelection } from "./utilities/types";
+import { Items, Survivor, UserSelection } from "./utilities/types";
 import Instructions from "./components/Instructions";
+import ItemSelection from "./components/ItemSelection";
 
 //app level: rendering the individual steps of the flow and nothing else
 function App() {
-    const [userSelection, setUserSelection] = useState<UserSelection>({} as UserSelection) //*to store survivor selected by user, user id, and items selected by user
+  const [userSelection, setUserSelection] = useState<UserSelection>(
+    {userID: 0,
+    userSurvivor: {} as Survivor,
+    userItems: []
+  }
+  ); //*to store survivor selected by user, user id, and items selected by user
 
-    
-    
-    console.log(userSelection)
+  console.log(userSelection);
 
-    const handleSurvivorSelection = (survivor: Survivor) => {
-      setUserSelection((prevUserSelection) => ({
-        ...prevUserSelection,
-        id: Date.now(),
-        userSurvivor: survivor
-      }));
-    };
+  const handleSurvivorSelection = (survivor: Survivor) => {
+    setUserSelection((prevUserSelection) => ({
+      ...prevUserSelection,
+      userID: Date.now(),
+      userSurvivor: survivor
+    }));
+  };
 
-    return <>
-      <Instructions />
-      <SurvivorSelection handleSurvivorSelection={handleSurvivorSelection} />
-    </>;
+  const handleItemSelection = (item: Items) => {
+    setUserSelection((prevUserSelection) => ({
+      ...prevUserSelection,
+      userItems: [...prevUserSelection.userItems, item]
+    }))
+  };
+
+  return (
+    <>
+      {(userSelection.userSurvivor.id === undefined) ? (
+        <>
+          {" "}
+          <Instructions />{" "}
+          <SurvivorSelection
+            handleSurvivorSelection={handleSurvivorSelection}
+          />
+        </>
+      ) : <ItemSelection handleItemSelection={handleItemSelection} userSelection={userSelection}/>}
+    </>
+  );
 }
 
 export default App;

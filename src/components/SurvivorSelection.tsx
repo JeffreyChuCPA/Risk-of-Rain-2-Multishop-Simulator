@@ -38,7 +38,7 @@ const SurvivorSelection: React.FC<{
       <div className="survivor-selection">
         {survivorList.map((survivor: Survivor) => (
           <div className="survivor" key={survivor.id}>
-            <img
+            <img className="survivor-image"
               src={survivor.imageLink}
               alt={`image of ${survivor.name}`}
               onClick={() => handleSurvivorSelection(survivor)}
