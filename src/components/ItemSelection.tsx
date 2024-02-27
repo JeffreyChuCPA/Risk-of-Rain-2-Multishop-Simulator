@@ -83,7 +83,7 @@ const ItemSelection: React.FC<{
       {/* <div className="items-selected">{userSelection.userItems.map(item => itemStack[item.itemName] < 2 ? <img className="item-image selected" src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} /> : <><img className="item-image selected" src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} />  <span>x{itemStack[item.itemName]}</span></>)}</div> */}
       <div className="items-selected">
         {userItemStack.map((item) =>
-          item.count < 2 ? (
+          item.count <= 1 ? (
             <img
               className="item-image selected"
               src={`public/assets/${item.itemStackRarity[0].rarity}/${item.item}.webp`}
