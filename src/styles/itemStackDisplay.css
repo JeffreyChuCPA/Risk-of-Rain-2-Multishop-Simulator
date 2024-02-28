@@ -1,0 +1,27 @@
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid red;
+  padding: 20px;
+  overflow-y: auto;
+  height: 40vh;
+}
+
+.results-itemContainer {
+  width: 95%;
+  border: 1px solid red;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content:flex-start
+}
+
+.results-item {
+  width: 3%;
+  margin: 20px 40px 20px 20px;
+}
+
+.item-description {
+
+}

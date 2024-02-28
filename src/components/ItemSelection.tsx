@@ -4,6 +4,7 @@ import { removedItems } from "../utilities/itemsToRemove";
 import urls from "../utilities/urls";
 import MultiShopSelection from "./MultiShopSelection";
 import { isEmpty } from "lodash";
+import StackCalculationDisplay from "./StackCalculationDisplay";
 
 export type AllItems = {
   [itemRarity in itemRarities]: {
@@ -23,13 +24,19 @@ const ItemSelection: React.FC<{
 
   const [itemStack, setItemStack] = useState<Record<string, number>>({});
 
-  const userItemStack = Object.entries(itemStack).map(([item, count]) => {
-    const itemStackRarity: Items[] = userSelection.userItems.filter(
-      (userItem) => userItem.itemName === item
-    );
+  const userItemStack = Object.entries(itemStack).map(
+    ([item, count]): {
+      item: string;
+      count: number;
+      userSelectedItems: Items[];
+    } => {
+      const userSelectedItems: Items[] = userSelection.userItems.filter(
+        (userItem) => userItem.itemName === item
+      );
 
-    return { item, count, itemStackRarity };
-  });
+      return { item, count, userSelectedItems };
+    }
+  );
 
   console.log(userItemStack);
 
@@ -80,29 +87,29 @@ const ItemSelection: React.FC<{
 
   return (
     <>
-      {/* <div className="items-selected">{userSelection.userItems.map(item => itemStack[item.itemName] < 2 ? <img className="item-image selected" src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} /> : <><img className="item-image selected" src={`public/assets/${item.rarity}/${item.itemName}.webp`} alt={item.itemName} />  <span>x{itemStack[item.itemName]}</span></>)}</div> */}
-      <div className="items-selected">
-        {userItemStack.map((item) =>
-          item.count < 2 ? (
-            <img
-              className="item-image selected"
-              src={`public/assets/${item.itemStackRarity[0].rarity}/${item.item}.webp`}
-              alt={item.item}
-            />
-          ) : (
-            <>
-            
+      {userSelection.userItems.length < 15 ? (
+        <div className="items-selected">
+          {userItemStack.map((item) =>
+            item.count <= 1 ? (
               <img
                 className="item-image selected"
-                src={`public/assets/${item.itemStackRarity[0].rarity}/${item.item}.webp`}
+                src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                 alt={item.item}
-              />{" "}
-              <span>x{itemStack[item.item]}</span>
-              
-            </>
-          )
-        )}
-      </div>
+              />
+            ) : (
+              <>
+                <img
+                  className="item-image selected"
+                  src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                  alt={item.item}
+                />{" "}
+                <span>x{itemStack[item.item]}</span>
+              </>
+            )
+          )}
+        </div>
+      ) : null}
+
       {!isEmpty(allItems.Common.items) ? (
         <MultiShopSelection
           setItemStack={setItemStack}
@@ -113,6 +120,9 @@ const ItemSelection: React.FC<{
       ) : null}
       {console.log(allItems)}
       {console.log(itemStack)}
+      {userSelection.userItems.length === 15 ? (
+        <StackCalculationDisplay userItemStack={userItemStack} />
+      ) : null}
     </>
   );
 };

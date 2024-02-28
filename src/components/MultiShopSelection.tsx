@@ -69,10 +69,13 @@ const MultiShopSelection: React.FC<{
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
           {multiShop.map((item, index) => (
+            <>
             <div className="multishop">
               {" "}
               <div className="multishop-top"></div>
               <div className="multishop-cap"></div>
+              <div className="multishop-cap-tip"></div>
+              <div className="multishop-rectangle"></div>
               <img
                 className="item-image"
                 key={`${item.id}+${index}`}
@@ -83,6 +86,7 @@ const MultiShopSelection: React.FC<{
               <div className="multishop-bottom"></div>
               <div className="multishop-bar"></div>
             </div>
+            </>
           ))}
         </div>
       )}
