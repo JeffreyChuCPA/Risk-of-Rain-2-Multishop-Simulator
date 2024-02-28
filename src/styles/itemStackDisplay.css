@@ -17,11 +17,18 @@
   justify-content:flex-start
 }
 
+.results-itemIcon {
+  display: flex;
+  align-items: center;
+  width: 20%;
+  max-width: 10vw
+}
 .results-item {
-  width: 3%;
+  width: 40%;
   margin: 20px 40px 20px 20px;
 }
 
-.item-description {
-
+.stack-count {
+  margin-right: 10px;
+  margin-left: -20px;
 }

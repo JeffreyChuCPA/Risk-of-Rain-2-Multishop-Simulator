@@ -118,9 +118,8 @@ const ItemSelection: React.FC<{
           userSelection={userSelection}
         />
       ) : null}
-      {console.log(allItems)}
-      {console.log(itemStack)}
-      {userSelection.userItems.length === 15 ? (
+
+      {userSelection.userItems.length === 15 ? (        
         <StackCalculationDisplay userItemStack={userItemStack} />
       ) : null}
     </>
