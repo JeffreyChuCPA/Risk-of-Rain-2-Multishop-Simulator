@@ -17,7 +17,8 @@ export const specialCalcItems: string[] = [
   "Shipping Request Form",
   "Alien Head",
   "Dio's Best Friend",
-  "H3AD-5T v2"
+  "H3AD-5T v2",
+  "Tougher Times"
 
 
 ]

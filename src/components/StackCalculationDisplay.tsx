@@ -1,11 +1,12 @@
 import React from "react";
 import { Items } from "../utilities/types";
 import "../styles/itemStackDisplay.css";
+import { specialCalcItems } from "../utilities/itemsToRemove";
+import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
 
 const StackCalculationDisplay: React.FC<{
   userItemStack: { item: string; count: number; userSelectedItems: Items[] }[];
 }> = ({ userItemStack }) => {
-
   //*obtain the per stack values for the item from within the "( )"
   const getStackValue = (description: string): number[] => {
     const stackStringIndex: number[] = [];
@@ -58,14 +59,14 @@ const StackCalculationDisplay: React.FC<{
 
     if (stack > 1) {
       for (let i = 0; i <= itemStatValues.length; i++) {
-  
-          updatedStatValue.push(itemStatValues[i] + (itemStackValues[i] * (stack - 1)));
-        
+        updatedStatValue.push(
+          itemStatValues[i] + itemStackValues[i] * (stack - 1)
+        );
       }
     } else {
-      updatedStatValue.push([...itemStatValues])
+      updatedStatValue.push([...itemStatValues]);
     }
-    
+
     return updatedStatValue.flat();
   };
 
@@ -77,18 +78,17 @@ const StackCalculationDisplay: React.FC<{
     const updatedItemStats: number[] = getUpdatedItemStat(item, stack);
     console.log(updatedItemStats);
 
-    const regex= /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
+    const regex = /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
     let currentIndex = 0;
 
     const replaceFunction = (match: string, p1: string, unitPart: string) => {
       if (currentIndex < updatedItemStats.length) {
-      const newValue: number = updatedItemStats[currentIndex];
-      currentIndex++;
-      return `${newValue}${unitPart}`;
+        const newValue: number = updatedItemStats[currentIndex];
+        currentIndex++;
+        return `${newValue}${unitPart}`;
       }
-      return match
+      return match;
     };
-    
 
     return description.replace(regex, replaceFunction);
   };
@@ -96,23 +96,30 @@ const StackCalculationDisplay: React.FC<{
   return (
     <div className="results-container">
       {userItemStack.map((item) => {
-
         return (
           <div className="results-itemContainer">
             <div className="results-itemIcon">
-            <img
-              className="results-item"
-              src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
-              alt={item.item}
-            />
-            <span className="stack-count">{item.count > 1 ? `x${item.count}`: null}</span>
+              <img
+                className="results-item"
+                src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                alt={item.item}
+              />
+              <span className="stack-count">
+                {item.count > 1 ? `x${item.count}` : null}
+              </span>
             </div>
             <span className="item-description">
-              {updatedItemDescription(
-                item.userSelectedItems[0],
-                item.count,
-                item.userSelectedItems[0].description
-              )}
+              {!specialCalcItems.includes(item.item)
+                ? updatedItemDescription(
+                    item.userSelectedItems[0],
+                    item.count,
+                    item.userSelectedItems[0].description
+                  )
+                : updatedSpecialCaseItemDescription(
+                    item.userSelectedItems[0],
+                    item.count,
+                    item.userSelectedItems[0].description
+                  )}
             </span>
           </div>
         );
