@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid red;
+  border: 1px solid #CAC686;
   padding: 20px;
   overflow-y: auto;
   height: 40vh;
@@ -10,7 +10,6 @@
 
 .results-itemContainer {
   width: 95%;
-  border: 1px solid red;
   padding: 20px;
   display: flex;
   align-items: center;

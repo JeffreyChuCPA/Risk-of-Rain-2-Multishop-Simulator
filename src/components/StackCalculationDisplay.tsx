@@ -63,11 +63,11 @@ const StackCalculationDisplay: React.FC<{
           itemStatValues[i] + itemStackValues[i] * (stack - 1)
         );
       }
-    } else {
-      updatedStatValue.push([...itemStatValues]);
+    } else { 
+      itemStatValues.forEach(value => updatedStatValue.push(value))
     }
 
-    return updatedStatValue.flat();
+    return updatedStatValue;
   };
 
   const updatedItemDescription = (
