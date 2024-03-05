@@ -2,6 +2,11 @@
 
 https://docs.google.com/spreadsheets/d/1pf3FsQaPXJtlf6j0P0R5G2aK87m0qPxM2XWKUNHPn3Q/edit#gid=0
 
+# Remaining Items
+
+- Build backend and database
+- CSS animations for when items are selected
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
