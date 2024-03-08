@@ -119,6 +119,7 @@ const ItemSelection: React.FC<{
         />
       ) : null}
 
+      {/* to convert below to a new page */}
       {userSelection.userItems.length === 15 ? (        
         <StackCalculationDisplay userItemStack={userItemStack} />
       ) : null}

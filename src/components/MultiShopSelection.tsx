@@ -64,6 +64,7 @@ const MultiShopSelection: React.FC<{
     console.log(multiShop);
   }, [multiShop]);
 
+  // to update the divs for styling
   return (
     <div className="container">
       {!isEmpty(multiShop) && (
