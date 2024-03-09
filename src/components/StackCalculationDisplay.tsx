@@ -7,7 +7,8 @@ import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc"
 const StackCalculationDisplay: React.FC<{
   userItemStack: { item: string; count: number; userSelectedItems: Items[] }[];
 }> = ({ userItemStack }) => {
-  //*obtain the per stack values for the item from within the "( )"
+  
+  //*obtain the per stack values for the item from within the "( )" in the item description
   const getStackValue = (description: string): number[] => {
     const stackStringIndex: number[] = [];
     const perStackValues: number[] = [];
@@ -39,7 +40,7 @@ const StackCalculationDisplay: React.FC<{
     let match: RegExpExecArray | null;
 
     while ((match = regex.exec(description)) !== null) {
-      // We push the first capturing group, which is the number we're interested in
+      // Push the first capturing group, which is the number we're interested in
       itemStatValues.push(parseFloat(match[1]));
     }
 
@@ -70,6 +71,7 @@ const StackCalculationDisplay: React.FC<{
     return updatedStatValue;
   };
 
+  //*to update the item description based on the item stack/count based on using regex to find the specific item stat value to replace with the new value
   const updatedItemDescription = (
     item: Items,
     stack: number,

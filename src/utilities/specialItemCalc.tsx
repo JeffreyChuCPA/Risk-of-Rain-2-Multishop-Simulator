@@ -1,6 +1,7 @@
 import { specialCalcItems } from "../utilities/itemsToRemove";
 import { Items } from "./types";
 
+//*to define the update description for the special case items
 export const updatedSpecialCaseItemDescription = (
   item: Items,
   stack: number,

@@ -10,9 +10,11 @@ const MultiShopSelection: React.FC<{
   userSelection: UserSelection;
   setItemStack: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
+  //*to store the 3 items to show for selection
   const [multiShop, setMultiShop] = useState<Items[]>([]);
 
   useEffect(() => {
+    //*to set % chance of item rarity for the 3 items
     const getRandomRarity = (): itemRarities => {
       const randomNumber: number = Math.floor(Math.random() * 100);
       if (randomNumber < 70) {
@@ -24,10 +26,12 @@ const MultiShopSelection: React.FC<{
       }
     };
 
+    //*to set a random index for determining the item to show for the given rarity of items
     const getRandomItemIndex = (itemRarityArray: Items[]): number => {
       return Math.floor(Math.random() * itemRarityArray.length);
     };
 
+    //*to generate 3 random items of a random rarity to display for selection
     const populateMultiShop = (allItems: AllItems): Items[] => {
       const multiShopRarity = getRandomRarity();
       const rolledItems: Items[] = [];
@@ -45,6 +49,7 @@ const MultiShopSelection: React.FC<{
       ? setMultiShop(populateMultiShop(allItems))
       : setMultiShop([]);
 
+    //*to set itemStack state var based on items selected from user in the userSelection state var
     const updateUserItemStack = (
       userSelection: UserSelection
     ): Record<string, number> => {

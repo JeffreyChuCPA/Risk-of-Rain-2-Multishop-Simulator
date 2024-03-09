@@ -8,9 +8,11 @@ const SurvivorSelection: React.FC<{
 }> = ({
   handleSurvivorSelection
 }) => {
-  const [survivorList, setSurvivorList] = useState<Survivor[]>([]); //*to store list of survivors from API pull
+  //*to store list of survivors from API pull
+  const [survivorList, setSurvivorList] = useState<Survivor[]>([]); 
 
   useEffect(() => {
+    //*API fetching survivors
     const fetchSurvivors = async () => {
       try {
         const response = await fetch(urls.survivorsURL);
