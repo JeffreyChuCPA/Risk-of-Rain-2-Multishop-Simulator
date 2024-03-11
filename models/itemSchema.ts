@@ -6,6 +6,7 @@ const itemSchema = new mongoose.Schema({
     of: String
   },
   survivor: String,
+  rarity: String,
 });
 
 const Item = mongoose.model("Item", itemSchema, "selected items");
