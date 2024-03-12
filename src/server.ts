@@ -2,8 +2,10 @@ import express from "express";
 const app = express();
 import mongoose from "mongoose";
 import Item from "../models/itemSchema";
+import cors from "cors"
 
 app.use(express.json()) //*body parser middleware
+app.use(cors()) //*allow requests from any origin
 
 const PORT: string | 5000 = process.env.PORT || 5000;
 
@@ -19,7 +21,7 @@ mongoose
 //   res.send("Welcome to the Multishop Terminal");
 // });
 
-app.post("/results", async (req, res) => {
+app.post("/api/results", async (req, res) => {
   console.log(req.body);
   
   const postItem = async () => {
@@ -37,7 +39,7 @@ app.post("/results", async (req, res) => {
   res.send(req.body);
 });
 
-app.get("/results/:survivor", async (req, res) => {
+app.get("/api/results/:survivor", async (req, res) => {
   const retrieveItems = async (rarity: string, survivor?: string) => {
     const matchStage = survivor ? { $match: { rarity: rarity, survivor: survivor } } : { $match: { rarity: rarity } }
 
@@ -56,6 +58,6 @@ app.get("/results/:survivor", async (req, res) => {
   const commonSurvivorItems = await retrieveItems("Common", req.params.survivor);
   const uncommonSurvivorItems = await retrieveItems("Uncommon", req.params.survivor);
   const legendarySurvivorItems = await retrieveItems("Legendary", req.params.survivor);
-
+  
   res.send({ commonItems, uncommonItems, legendaryItems, commonSurvivorItems, uncommonSurvivorItems, legendarySurvivorItems });
 });

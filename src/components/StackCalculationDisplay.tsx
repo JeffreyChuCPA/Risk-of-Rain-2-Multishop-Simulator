@@ -1,13 +1,82 @@
-import React from "react";
-import { Items } from "../utilities/types";
+import React, { useEffect, useState } from "react";
+import { Items, UserSelection, itemRarities } from "../utilities/types";
 import "../styles/itemStackDisplay.css";
 import { specialCalcItems } from "../utilities/itemsToRemove";
 import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
+import TopSelectedItems from "./TopSelectedItems";
+
+export type DBItem = {
+  _id: string;
+  count: number;
+};
+
+export type DBItems = {
+  [itemRarity in itemRarities]: DBItem[];
+};
 
 const StackCalculationDisplay: React.FC<{
   userItemStack: { item: string; count: number; userSelectedItems: Items[] }[];
-}> = ({ userItemStack }) => {
-  
+  userSelection: UserSelection;
+}> = ({ userItemStack, userSelection }) => {
+  const [topItems, setTopItems] = useState<DBItems>({
+    Common: [],
+    Uncommon: [],
+    Legendary: []
+  });
+
+  const [topSurvivorItems, setTopSurvivorItems] = useState<DBItems>({
+    Common: [],
+    Uncommon: [],
+    Legendary: []
+  });
+
+  useEffect(() => {
+    const postItems = async (userSelection: UserSelection) => {
+      try {
+        const response = await fetch("http://localhost:5000/api/results", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(userSelection)
+        });
+
+        const result = await response.json();
+        console.log("Success", result);
+        getItems(userSelection.userSurvivor.name)
+      } catch (error) {
+        console.error("Error in posting items", error);
+      }
+    };
+
+    const getItems = async (survivor: string) => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/results/${survivor}`)
+        const results = await response.json();
+        console.log(results);
+        
+
+        setTopItems({
+          Common: results.commonItems,
+          Uncommon: results.uncommonItems,
+          Legendary: results.legendaryItems
+        })
+
+        setTopSurvivorItems({
+          Common: results.commonSurvivorItems,
+          Uncommon: results.uncommonSurvivorItems,
+          Legendary: results.legendarySurvivorItems
+        })
+
+      } catch (error) {
+        console.error("Error in getting items", error);
+        
+      }
+    }
+
+    postItems(userSelection);
+  }, []);
+
   //*obtain the per stack values for the item from within the "( )" in the item description
   const getStackValue = (description: string): number[] => {
     const stackStringIndex: number[] = [];
@@ -64,8 +133,8 @@ const StackCalculationDisplay: React.FC<{
           itemStatValues[i] + itemStackValues[i] * (stack - 1)
         );
       }
-    } else { 
-      itemStatValues.forEach(value => updatedStatValue.push(value))
+    } else {
+      itemStatValues.forEach((value) => updatedStatValue.push(value));
     }
 
     return updatedStatValue;
@@ -96,37 +165,41 @@ const StackCalculationDisplay: React.FC<{
   };
 
   return (
-    <div className="results-container">
-      {userItemStack.map((item) => {
-        return (
-          <div className="results-itemContainer">
-            <div className="results-itemIcon">
-              <img
-                className="results-item"
-                src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
-                alt={item.item}
-              />
-              <span className="stack-count">
-                {item.count > 1 ? `x${item.count}` : null}
+    <>
+      <div className="results-container">
+        {userItemStack.map((item) => {
+          return (
+            <div className="results-itemContainer">
+              <div className="results-itemIcon">
+                <img
+                  className="results-item"
+                  src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                  alt={item.item}
+                />
+                <span className="stack-count">
+                  {item.count > 1 ? `x${item.count}` : null}
+                </span>
+              </div>
+              <span className="item-description">
+                {!specialCalcItems.includes(item.item)
+                  ? updatedItemDescription(
+                      item.userSelectedItems[0],
+                      item.count,
+                      item.userSelectedItems[0].description
+                    )
+                  : updatedSpecialCaseItemDescription(
+                      item.userSelectedItems[0],
+                      item.count,
+                      item.userSelectedItems[0].description
+                    )}
               </span>
             </div>
-            <span className="item-description">
-              {!specialCalcItems.includes(item.item)
-                ? updatedItemDescription(
-                    item.userSelectedItems[0],
-                    item.count,
-                    item.userSelectedItems[0].description
-                  )
-                : updatedSpecialCaseItemDescription(
-                    item.userSelectedItems[0],
-                    item.count,
-                    item.userSelectedItems[0].description
-                  )}
-            </span>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+      <TopSelectedItems dbItems={topItems}/>
+      <TopSelectedItems dbItems={topSurvivorItems} />
+    </>
   );
 };
 
