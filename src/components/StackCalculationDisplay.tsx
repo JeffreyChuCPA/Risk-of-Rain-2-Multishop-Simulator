@@ -8,6 +8,7 @@ import TopSelectedItems from "./TopSelectedItems";
 export type DBItem = {
   _id: string;
   count: number;
+  rarity: string;
 };
 
 export type DBItems = {
@@ -43,7 +44,7 @@ const StackCalculationDisplay: React.FC<{
 
         const result = await response.json();
         console.log("Success", result);
-        getItems(userSelection.userSurvivor.name)
+        getItems(userSelection.userSurvivor.name);
       } catch (error) {
         console.error("Error in posting items", error);
       }
@@ -51,28 +52,27 @@ const StackCalculationDisplay: React.FC<{
 
     const getItems = async (survivor: string) => {
       try {
-        const response = await fetch(`http://localhost:5000/api/results/${survivor}`)
+        const response = await fetch(
+          `http://localhost:5000/api/results/${survivor}`
+        );
         const results = await response.json();
         console.log(results);
-        
 
         setTopItems({
           Common: results.commonItems,
           Uncommon: results.uncommonItems,
           Legendary: results.legendaryItems
-        })
+        });
 
         setTopSurvivorItems({
           Common: results.commonSurvivorItems,
           Uncommon: results.uncommonSurvivorItems,
           Legendary: results.legendarySurvivorItems
-        })
-
+        });
       } catch (error) {
         console.error("Error in getting items", error);
-        
       }
-    }
+    };
 
     postItems(userSelection);
   }, []);
@@ -166,6 +166,7 @@ const StackCalculationDisplay: React.FC<{
 
   return (
     <>
+      <div className="results-title">Items Collected</div>
       <div className="results-container">
         {userItemStack.map((item) => {
           return (
@@ -197,8 +198,25 @@ const StackCalculationDisplay: React.FC<{
           );
         })}
       </div>
-      <TopSelectedItems dbItems={topItems}/>
-      <TopSelectedItems dbItems={topSurvivorItems} />
+        <div className="fetch-results-title-container">
+          <div className="title-results-container overall">
+            Top 5 Overall Selected Items
+          </div>
+          <div className="title-results-container">
+            Top 5 Selected Items for <img className="results-survivor-image"
+                  src={userSelection.userSurvivor.imageLink}
+                  alt={`image of ${userSelection.userSurvivor.name}`}
+                />
+          </div>
+        </div>
+      <div className="fetch-results-container">
+          <div className="top-results-container">
+            <TopSelectedItems dbItems={topItems} />
+          </div>
+            <div className="top-results-container">
+              <TopSelectedItems dbItems={topSurvivorItems} />
+            </div>
+      </div>
     </>
   );
 };

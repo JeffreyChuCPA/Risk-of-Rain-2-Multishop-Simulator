@@ -4,6 +4,13 @@ import SurvivorSelection from "./components/SurvivorSelection";
 import { Items, Survivor, UserSelection } from "./utilities/types";
 import Instructions from "./components/Instructions";
 import ItemSelection from "./components/ItemSelection";
+import map1 from '../public/assets/background/map-1.jpg'
+import map2 from '../public/assets/background/map-2.jpg'
+import map3 from '../public/assets/background/map-3.jpg'
+import map4 from '../public/assets/background/map-4.jpg'
+import map5 from '../public/assets/background/map-5.jpg'
+import map6 from '../public/assets/background/map-6.jpg'
+import map7 from '../public/assets/background/map-7.jpg'
 
 //app level: rendering the individual steps of the flow and nothing else
 function App() {
@@ -14,8 +21,6 @@ function App() {
     userItems: []
   }
   ); 
-
-  console.log(userSelection);
 
   //*onClick handler for selecting survivor
   const handleSurvivorSelection = (survivor: Survivor) => {
@@ -34,9 +39,24 @@ function App() {
     }))
   };
 
+  
+
+  const backgroundArray: string[] = [map1, map2, map3, map4, map5, map6, map7]
+  const randomIndex: number = Math.floor(Math.random() * backgroundArray.length)
+  const selectedBackground: string = backgroundArray[randomIndex]
+
+  const backgroundStyle = {
+    backgroundImage: `url(${selectedBackground})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    height: "100vh",
+  }
+
 
   return (
     <>
+      <div style={userSelection.userItems.length < 15 ? backgroundStyle : undefined}>
       {(userSelection.userSurvivor.id === undefined) ? (
         <>
           {" "}
@@ -46,6 +66,7 @@ function App() {
           />
         </>
       ) : <ItemSelection handleItemSelection={handleItemSelection} userSelection={userSelection}/>}
+      </div>
     </>
   );
 }

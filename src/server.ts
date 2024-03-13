@@ -16,10 +16,6 @@ mongoose
   .then(() => console.log("Connected to Mongodb..."))
   .catch((err) => console.error("Could not connect to Mongodb...", err));
 
-// app.get("/", (req, res) => {
-//   //*here is where we usually get stuff from database then return it
-//   res.send("Welcome to the Multishop Terminal");
-// });
 
 app.post("/api/results", async (req, res) => {
   console.log(req.body);
@@ -47,7 +43,8 @@ app.get("/api/results/:survivor", async (req, res) => {
       matchStage,
       { $group: { _id: "$item.itemName", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
-      { $limit: 5 }
+      { $limit: 5 },
+      { $project: {_id: 1, count: 1, rarity: rarity}}
     ]);
     return items;
   };

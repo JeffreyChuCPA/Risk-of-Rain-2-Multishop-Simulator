@@ -71,7 +71,7 @@ const MultiShopSelection: React.FC<{
 
   // to update the divs for styling
   return (
-    <div className="container">
+    <div className={userSelection.userItems.length < 15 ? "container" : undefined}>
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
           {multiShop.map((item, index) => (
