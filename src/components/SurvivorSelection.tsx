@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/survivor.css";
 import { Survivor } from "../utilities/types";
 import urls from "../utilities/urls";
+import { playClickSound, playHoverSound } from "../utilities/fxFunctions";
+
 
 const SurvivorSelection: React.FC<{
   handleSurvivorSelection: (survivor: Survivor) => void;
@@ -36,6 +38,8 @@ const SurvivorSelection: React.FC<{
     
   }, [])
 
+
+
   return (
       <div className="survivor-selection">
         {survivorList.map((survivor: Survivor) => (
@@ -43,7 +47,11 @@ const SurvivorSelection: React.FC<{
             <img className="survivor-image"
               src={survivor.imageLink}
               alt={`image of ${survivor.name}`}
-              onClick={() => handleSurvivorSelection(survivor)}
+              onClick={() => {
+                handleSurvivorSelection(survivor);
+                playClickSound()
+              }}
+              onMouseOver={playHoverSound}
             />{" "}
           </div>
         ))}

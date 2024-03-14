@@ -41,10 +41,10 @@ app.get("/api/results/:survivor", async (req, res) => {
 
     const items = await Item.aggregate([
       matchStage,
-      { $group: { _id: "$item.itemName", count: { $sum: 1 } } },
+      { $group: { _id: "$item.itemName", count: { $sum: 1 }, description: {$first: "$item.description"} } },
       { $sort: { count: -1 } },
       { $limit: 5 },
-      { $project: {_id: 1, count: 1, rarity: rarity}}
+      { $project: {_id: 1, count: 1, rarity: rarity, description: 1}}
     ]);
     return items;
   };
@@ -55,6 +55,8 @@ app.get("/api/results/:survivor", async (req, res) => {
   const commonSurvivorItems = await retrieveItems("Common", req.params.survivor);
   const uncommonSurvivorItems = await retrieveItems("Uncommon", req.params.survivor);
   const legendarySurvivorItems = await retrieveItems("Legendary", req.params.survivor);
+  console.log(commonItems);
+  
   
   res.send({ commonItems, uncommonItems, legendaryItems, commonSurvivorItems, uncommonSurvivorItems, legendarySurvivorItems });
 });

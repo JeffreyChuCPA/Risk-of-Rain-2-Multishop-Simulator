@@ -50,8 +50,6 @@
 
 .fetch-results-title-container {
   display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .fetch-results-container {
@@ -71,6 +69,8 @@
   align-items: center;
   justify-content: center;
   height: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .results-survivor-image {
@@ -82,7 +82,11 @@
 }
 
 .overall {
-  /* margin-top: 61px; */
+  margin-right: 10px;
+}
+
+.survivor {
+  margin-left: 10px;
 }
 
 .top-results-container {

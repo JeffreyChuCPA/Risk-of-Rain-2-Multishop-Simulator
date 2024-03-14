@@ -4,6 +4,7 @@ import "../styles/itemStackDisplay.css";
 import { specialCalcItems } from "../utilities/itemsToRemove";
 import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
 import TopSelectedItems from "./TopSelectedItems";
+import { playHoverSound } from "../utilities/fxFunctions";
 
 export type DBItem = {
   _id: string;
@@ -164,6 +165,7 @@ const StackCalculationDisplay: React.FC<{
     return description.replace(regex, replaceFunction);
   };
 
+
   return (
     <>
       <div className="results-title">Items Collected</div>
@@ -176,6 +178,7 @@ const StackCalculationDisplay: React.FC<{
                   className="results-item"
                   src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                   alt={item.item}
+                  onMouseOver={playHoverSound}
                 />
                 <span className="stack-count">
                   {item.count > 1 ? `x${item.count}` : null}
@@ -203,17 +206,19 @@ const StackCalculationDisplay: React.FC<{
             Top 5 Overall Selected Items
           </div>
           <div className="title-results-container">
-            Top 5 Selected Items for <img className="results-survivor-image"
+            Top 5 Selected Items for 
+            <img className="results-survivor-image"
                   src={userSelection.userSurvivor.imageLink}
                   alt={`image of ${userSelection.userSurvivor.name}`}
+                  onMouseOver={playHoverSound}
                 />
           </div>
         </div>
       <div className="fetch-results-container">
-          <div className="top-results-container">
+          <div className="top-results-container overall">
             <TopSelectedItems dbItems={topItems} />
           </div>
-            <div className="top-results-container">
+            <div className="top-results-container survivor">
               <TopSelectedItems dbItems={topSurvivorItems} />
             </div>
       </div>

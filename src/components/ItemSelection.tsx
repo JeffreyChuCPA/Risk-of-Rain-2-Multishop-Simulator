@@ -5,6 +5,7 @@ import urls from "../utilities/urls";
 import MultiShopSelection from "./MultiShopSelection";
 import { isEmpty } from "lodash";
 import StackCalculationDisplay from "./StackCalculationDisplay";
+import { playHoverSound } from "../utilities/fxFunctions";
 
 export type AllItems = {
   [itemRarity in itemRarities]: {
@@ -99,6 +100,7 @@ const ItemSelection: React.FC<{
                 className="item-image selected"
                 src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                 alt={item.item}
+                onMouseOver={playHoverSound}
               />
             ) : (
               <>

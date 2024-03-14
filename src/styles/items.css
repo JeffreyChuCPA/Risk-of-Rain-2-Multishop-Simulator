@@ -6,7 +6,7 @@
 }
 
 .items-selected {
-  border: 1px solid #CAC686;
+  border: 2px solid #CAC686;
   background-color: #242424;
   display: flex;
   align-items: flex-start;
@@ -149,6 +149,32 @@ span {
 
 .multishop-closed {
   transform: translateY(50%)
+}
+
+.item-hover {
+  width: 300px;
+  height: 150px;
+  border: 2px solid #CAC686;
+  background-color: #242424;
+  position: absolute;
+  bottom: -40px;
+  z-index: 4;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-hover {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.text-hover {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 5px;
 }
 
 @media (max-width: 1339px) {
