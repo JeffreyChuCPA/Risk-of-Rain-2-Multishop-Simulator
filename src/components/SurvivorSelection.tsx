@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/survivor.css";
 import { Survivor } from "../utilities/types";
 import urls from "../utilities/urls";
-import { playClickSound, playHoverSound } from "../utilities/fxFunctions";
+import SurvivorDisplay from "./SurvivorDisplay";
 
 
 const SurvivorSelection: React.FC<{
@@ -20,12 +20,20 @@ const SurvivorSelection: React.FC<{
         const response = await fetch(urls.survivorsURL);
         if (response.ok) {
           const data = await response.json();
-          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string}) => ({
+          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string, health: { value: string}, healthRegen: { value: string}, damage: { value: string}, speed: { value: string}, armor: { value: string}, type: string}) => ({
             id: survivor._id,
             name: survivor.survivorName,
-            imageLink: survivor.survivorImage
+            imageLink: survivor.survivorImage,
+            health: survivor.health.$numberDecimal,
+            healthRegen: survivor.healthRegen.$numberDecimal,
+            damage: survivor.damage.$numberDecimal,
+            speed: survivor.speed.$numberDecimal,
+            armor: survivor.armor.$numberDecimal,
+            type: survivor.type
           }))
           setSurvivorList(survivorData)
+          console.log(survivorData);
+          
         } else {
           throw new Error("Failed to retrieve survivors")
         }
@@ -44,7 +52,8 @@ const SurvivorSelection: React.FC<{
       <div className="survivor-selection">
         {survivorList.map((survivor: Survivor) => (
           <div className="survivor" key={survivor.id}>
-            <img className="survivor-image"
+            <SurvivorDisplay survivor={survivor} handleSurvivorSelection={() => handleSurvivorSelection(survivor)} hoverStyle="survivor-hover" />
+            {/* <img className="survivor-image"
               src={survivor.imageLink}
               alt={`image of ${survivor.name}`}
               onClick={() => {
@@ -52,7 +61,7 @@ const SurvivorSelection: React.FC<{
                 playClickSound()
               }}
               onMouseOver={playHoverSound}
-            />{" "}
+            />{" "} */}
           </div>
         ))}
       </div>

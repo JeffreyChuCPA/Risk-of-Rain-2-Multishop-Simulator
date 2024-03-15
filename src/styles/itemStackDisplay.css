@@ -56,6 +56,7 @@
   display: flex;
   margin-left: 10px;
   margin-right: 10px;
+  z-index: -1;
 }
 
 .title-results-container {
@@ -87,6 +88,7 @@
 
 .survivor {
   margin-left: 10px;
+  position: relative;
 }
 
 .top-results-container {
@@ -96,7 +98,6 @@
   justify-content: space-evenly;
   border: 1px solid #CAC686;
   padding: 20px;
-  overflow-y: auto;
   margin-top: 10px;
 }
 
@@ -113,12 +114,13 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  
+  position: relative;
 }
 
 .ranked-item-image {
   width: 70px;
   margin-bottom: 10px;
+  
 }
 
 li {

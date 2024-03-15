@@ -22,6 +22,29 @@ function App() {
   }
   ); 
 
+  //*to store when the user has started the app
+  const [start, setStart] = useState<boolean>(false)
+
+  //*to store state of the background image
+  const backgroundArray: string[] = [map1, map2, map3, map4, map5, map7]
+  const initialBackground: string = map6
+  const [backgroundImage, setBackgroundImage] = useState<string>(initialBackground)
+  console.log(backgroundImage);
+  
+
+  const backgroundStyle = {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    height: "100vh",
+  }
+
+  const randomIndex: number = Math.floor(Math.random() * backgroundArray.length)
+  const selectedBackground: string = backgroundArray[randomIndex]
+
+
+
   //*onClick handler for selecting survivor
   const handleSurvivorSelection = (survivor: Survivor) => {
     setUserSelection((prevUserSelection) => ({
@@ -37,33 +60,21 @@ function App() {
       ...prevUserSelection,
       userItems: [...prevUserSelection.userItems, item]
     }))
+    setBackgroundImage(selectedBackground)
   };
 
   
-
-  const backgroundArray: string[] = [map1, map2, map3, map4, map5, map6, map7]
-  const randomIndex: number = Math.floor(Math.random() * backgroundArray.length)
-  const selectedBackground: string = backgroundArray[randomIndex]
-
-  const backgroundStyle = {
-    backgroundImage: `url(${selectedBackground})`,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    height: "100vh",
-  }
-
-
   return (
     <>
       <div style={userSelection.userItems.length < 15 ? backgroundStyle : undefined}>
       {(userSelection.userSurvivor.id === undefined) ? (
         <>
           {" "}
-          <Instructions />{" "}
-          <SurvivorSelection
+          <Instructions start={start} setStart={setStart}/>{" "}
+          {start && <SurvivorSelection
             handleSurvivorSelection={handleSurvivorSelection}
-          />
+          />}
+          
         </>
       ) : <ItemSelection handleItemSelection={handleItemSelection} userSelection={userSelection}/>}
       </div>

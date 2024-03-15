@@ -24,6 +24,12 @@ export interface Survivor {
   id: string;
   name: string;
   imageLink: string;
+  health: string;
+  healthRegen: string;
+  damage: string;
+  speed: string;
+  armor: string;
+  type: string
 }
 
 export interface UserSelection {

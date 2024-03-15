@@ -5,6 +5,7 @@ import "../styles/items.css";
 import { isEmpty } from "lodash";
 import { playHoverSound, playItemClickSound } from "../utilities/fxFunctions";
 import HoverInfo from "./OnHoverDisplay";
+import ItemDisplay from "./ItemDisplay";
 // import OnHoverDisplay from "./OnHoverDisplay";
 
 const MultiShopSelection: React.FC<{
@@ -16,7 +17,7 @@ const MultiShopSelection: React.FC<{
   //*to store the 3 items to show for selection
   const [multiShop, setMultiShop] = useState<Items[]>([]);
   //*to track if item img is hovered on
-  const [isHovering, setIsHovering] = useState<boolean>(false)
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
   useEffect(() => {
     //*to set % chance of item rarity for the 3 items
@@ -71,35 +72,41 @@ const MultiShopSelection: React.FC<{
   }, [allItems, userSelection]);
 
   const handleMouseOver = () => {
-    setIsHovering(true)
-    console.log('hovering');
-    
-  }
+    setIsHovering(true);
+    console.log("hovering");
+  };
 
   const handleMouseOut = () => {
-    setIsHovering(false)
-    console.log('not hovering');
-    
-  }
+    setIsHovering(false);
+    console.log("not hovering");
+  };
 
   // to update the divs for styling
   return (
-    <div className={userSelection.userItems.length < 15 ? "container" : undefined}>
+    <div
+      className={userSelection.userItems.length < 15 ? "container" : undefined}
+    >
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
           {multiShop.map((item, index) => (
             <>
               <div className="multishop">
-              
                 {/* <div className="multishop-top-wrapper"> */}
-                  <div className="multishop-top">
-                    <div className="multishop-sliding-door"></div>
+                <div className="multishop-top">
+                  <div className="multishop-sliding-door"></div>
                   {/* </div> */}
-                  </div>
+                </div>
                 <div className="multishop-cap"></div>
                 <div className="multishop-cap-tip"></div>
                 <div className="multishop-rectangle"></div>
-                <img
+                <ItemDisplay
+                  item={item}
+                  className={"item-image"}
+                  handleItemSelection={() => handleItemSelection(item)}
+                  playItemClickSound={() => playItemClickSound(item.rarity)}
+                  hoverStyle="item-hover-multishop"
+                />
+                {/* <img
                   className="item-image"
                   key={`${item.id}+${index}`}
                   src={`public/assets/${item.rarity}/${item.itemName}.webp`}
@@ -114,7 +121,7 @@ const MultiShopSelection: React.FC<{
                   }}
                   onMouseOut={handleMouseOut}
                 />
-                {isHovering && <HoverInfo item={item}/>}
+                {isHovering && <HoverInfo item={item}/>} */}
                 <div className="multishop-bottom"></div>
                 <div className="multishop-bar"></div>
               </div>
@@ -122,7 +129,6 @@ const MultiShopSelection: React.FC<{
           ))}
         </div>
       )}
-      
     </div>
   );
 };

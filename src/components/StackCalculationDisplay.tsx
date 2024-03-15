@@ -10,6 +10,7 @@ export type DBItem = {
   _id: string;
   count: number;
   rarity: string;
+  description: string
 };
 
 export type DBItems = {
