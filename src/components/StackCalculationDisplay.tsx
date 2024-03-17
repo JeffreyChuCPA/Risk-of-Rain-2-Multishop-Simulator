@@ -5,12 +5,13 @@ import { specialCalcItems } from "../utilities/itemsToRemove";
 import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
 import TopSelectedItems from "./TopSelectedItems";
 import { playHoverSound } from "../utilities/fxFunctions";
+import LoadingDisplay from "./LoadingDisplay";
 
 export type DBItem = {
   _id: string;
   count: number;
   rarity: string;
-  description: string
+  description: string;
 };
 
 export type DBItems = {
@@ -32,6 +33,9 @@ const StackCalculationDisplay: React.FC<{
     Uncommon: [],
     Legendary: []
   });
+
+  //*to track if in loading state from the API fetch
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const postItems = async (userSelection: UserSelection) => {
@@ -58,7 +62,7 @@ const StackCalculationDisplay: React.FC<{
           `http://localhost:5000/api/results/${survivor}`
         );
         const results = await response.json();
-        console.log(results);
+        setIsLoading(false);
 
         setTopItems({
           Common: results.commonItems,
@@ -166,7 +170,6 @@ const StackCalculationDisplay: React.FC<{
     return description.replace(regex, replaceFunction);
   };
 
-
   return (
     <>
       <div className="results-title">Items Collected</div>
@@ -202,26 +205,35 @@ const StackCalculationDisplay: React.FC<{
           );
         })}
       </div>
-        <div className="fetch-results-title-container">
-          <div className="title-results-container overall">
-            Top 5 Overall Selected Items
-          </div>
-          <div className="title-results-container">
-            Top 5 Selected Items for 
-            <img className="results-survivor-image"
-                  src={userSelection.userSurvivor.imageLink}
-                  alt={`image of ${userSelection.userSurvivor.name}`}
-                  onMouseOver={playHoverSound}
-                />
-          </div>
+      <div className="fetch-results-title-container">
+        <div className="title-results-container overall">
+          Top 5 Overall Selected Items
         </div>
+        <div className="title-results-container">
+          Top 5 Selected Items for
+          <img
+            className="results-survivor-image"
+            src={userSelection.userSurvivor.imageLink}
+            alt={`image of ${userSelection.userSurvivor.name}`}
+            onMouseOver={playHoverSound}
+          />
+        </div>
+      </div>
       <div className="fetch-results-container">
+        {isLoading ? (
+          <LoadingDisplay />
+        ) : (
           <div className="top-results-container overall">
             <TopSelectedItems dbItems={topItems} />
           </div>
-            <div className="top-results-container survivor">
-              <TopSelectedItems dbItems={topSurvivorItems} />
-            </div>
+        )}
+        {isLoading ? (
+          <LoadingDisplay />
+        ) : (
+          <div className="top-results-container survivor">
+            <TopSelectedItems dbItems={topSurvivorItems} />
+          </div>
+        )}
       </div>
     </>
   );

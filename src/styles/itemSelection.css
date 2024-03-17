@@ -1,0 +1,66 @@
+.container {
+  position: relative;
+  width: 200px; /* Set to the width of your image */
+  height: 200px; /* Set to the height of your image */
+}
+
+.circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(100px);
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+  }
+}
+
+.line {
+  position: absolute;
+  width: 7px;
+  background-color: black;
+  top: 100%;
+  left: 50%;
+  bottom: 0;
+  transform-origin: top;
+  animation: lineAnimation 1s infinite alternate;
+}
+
+@keyframes lineAnimation {
+  0% {
+    height: 0px;
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+    transform: translateY(0);
+  }
+
+  25% {
+    height: 100px;
+  }
+
+  50% {
+    height: 0px;
+    transform: translateY(-100px);
+  }
+
+  70% {
+    height: 75px;
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+  }
+
+  100% {
+    height: 100px; 
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+  }
+}

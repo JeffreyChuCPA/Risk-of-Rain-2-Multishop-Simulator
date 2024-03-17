@@ -3,6 +3,7 @@ import "../styles/survivor.css";
 import { Survivor } from "../utilities/types";
 import urls from "../utilities/urls";
 import SurvivorDisplay from "./SurvivorDisplay";
+import LoadingDisplay from "./LoadingDisplay";
 
 
 const SurvivorSelection: React.FC<{
@@ -12,6 +13,8 @@ const SurvivorSelection: React.FC<{
 }) => {
   //*to store list of survivors from API pull
   const [survivorList, setSurvivorList] = useState<Survivor[]>([]); 
+  //*to track if in loading state from the API fetch
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     //*API fetching survivors
@@ -20,7 +23,7 @@ const SurvivorSelection: React.FC<{
         const response = await fetch(urls.survivorsURL);
         if (response.ok) {
           const data = await response.json();
-          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string, health: { value: string}, healthRegen: { value: string}, damage: { value: string}, speed: { value: string}, armor: { value: string}, type: string}) => ({
+          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string, health: string, healthRegen: string, damage:  string, speed: string, armor:  string, type: string}) => ({
             id: survivor._id,
             name: survivor.survivorName,
             imageLink: survivor.survivorImage,
@@ -32,8 +35,7 @@ const SurvivorSelection: React.FC<{
             type: survivor.type
           }))
           setSurvivorList(survivorData)
-          console.log(survivorData);
-          
+          setIsLoading(false)          
         } else {
           throw new Error("Failed to retrieve survivors")
         }
@@ -50,20 +52,13 @@ const SurvivorSelection: React.FC<{
 
   return (
       <div className="survivor-selection">
-        {survivorList.map((survivor: Survivor) => (
-          <div className="survivor" key={survivor.id}>
-            <SurvivorDisplay survivor={survivor} handleSurvivorSelection={() => handleSurvivorSelection(survivor)} hoverStyle="survivor-hover" />
-            {/* <img className="survivor-image"
-              src={survivor.imageLink}
-              alt={`image of ${survivor.name}`}
-              onClick={() => {
-                handleSurvivorSelection(survivor);
-                playClickSound()
-              }}
-              onMouseOver={playHoverSound}
-            />{" "} */}
-          </div>
-        ))}
+        {isLoading ? <LoadingDisplay/> : (
+          survivorList.map((survivor: Survivor) => (
+            <div className="survivor" key={survivor.id}>
+              <SurvivorDisplay survivor={survivor} handleSurvivorSelection={() => handleSurvivorSelection(survivor)} hoverStyle="survivor-hover" />
+            </div>
+          ))
+        )}
       </div>
   );
 };

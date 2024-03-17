@@ -5,8 +5,11 @@ const TopSelectedItems: React.FC<{
   dbItems: DBItems;
 }> = ({ dbItems }) => {
 
+  
+
   return (
     <>
+      {}
       <div className="ranked-item-rarity">
         <span>Common</span>
         {dbItems.Common.map((item, index) => (
