@@ -18,9 +18,7 @@ const HoverInfo: React.FC<{item?: Items | DBItem, survivor?: Survivor, hoverStyl
         <div className="text-hover">Armor: {survivor?.armor}</div>
         <div className="text-hover">Type: {survivor?.type}</div>
       </div>}
-        
-      
-  </>
+              </>
   )
 }
 
