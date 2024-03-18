@@ -3,7 +3,8 @@
   text-align: center;
   padding: 30px;
   background-color: #242424;
-  margin: 20px 30px 80px 30px
+  margin: 20px 30px 80px 30px;
+  position: relative; 
 }
 
 .instructions-title {
@@ -41,4 +42,23 @@
 
 .instructions-btn:hover {
   background-color: #54b627;
+}
+
+.github-link {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white
+}
+
+.github-icon {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.github-text {
+  margin-top: 3px;;
 }

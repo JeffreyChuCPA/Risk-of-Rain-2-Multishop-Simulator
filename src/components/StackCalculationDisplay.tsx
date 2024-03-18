@@ -172,7 +172,10 @@ const StackCalculationDisplay: React.FC<{
 
   return (
     <>
-      <div className="results-title">Items Collected</div>
+      <div className="results-title">Items Collected <a className="results-github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
+        <img className="results-github-icon" src="public/assets/github-icon.png" title="GitHub" alt="github"/>
+        <span className="results-github-text">GitHub</span>
+        </a></div>
       <div className="results-container">
         {userItemStack.map((item) => {
           return (

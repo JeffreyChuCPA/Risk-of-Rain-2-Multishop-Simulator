@@ -9,6 +9,25 @@
   background-color: #2F2C37;
   margin-left: 10px;
   margin-right: 10px;
+  position: relative;
+}
+.results-github-link {
+  position: absolute;
+  right: 1%;
+  top: 9%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white
+}
+
+.results-github-icon {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.results-github-text {
+  margin-top: 3px;;
 }
 
 .results-container {

@@ -6,7 +6,12 @@ const Instructions: React.FC<{
   setStart: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ start, setStart }) => {
   return (
+    <>
     <div className="instructions">
+      <a className="github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
+        <img className="github-icon" src="public/assets/github-icon.png" title="GitHub" alt="github"/>
+        <span className="github-text">GitHub</span>
+        </a>
       <span className="instructions-title">Multishop Terminal Simulator</span>
       <div className="instructions-intro">
         Welcome to the Risk of Rain 2 Multishop Terminal Simulator! Here is how
@@ -26,6 +31,7 @@ const Instructions: React.FC<{
         </button>
       )}
     </div>
+    </>
   );
 };
 

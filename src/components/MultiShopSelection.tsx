@@ -3,8 +3,7 @@ import { AllItems } from "./ItemSelection";
 import { Items, UserSelection, itemRarities } from "../utilities/types";
 import "../styles/items.css";
 import { isEmpty } from "lodash";
-import { playHoverSound, playItemClickSound } from "../utilities/fxFunctions";
-import HoverInfo from "./OnHoverDisplay";
+import { playItemClickSound } from "../utilities/fxFunctions";
 import ItemDisplay from "./ItemDisplay";
 // import OnHoverDisplay from "./OnHoverDisplay";
 
@@ -16,8 +15,7 @@ const MultiShopSelection: React.FC<{
 }> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
   //*to store the 3 items to show for selection
   const [multiShop, setMultiShop] = useState<Items[]>([]);
-  //*to track if item img is hovered on
-  const [isHovering, setIsHovering] = useState<boolean>(false);
+
 
   useEffect(() => {
     //*to set % chance of item rarity for the 3 items
@@ -71,15 +69,6 @@ const MultiShopSelection: React.FC<{
     setItemStack(updateUserItemStack(userSelection));
   }, [allItems, userSelection]);
 
-  const handleMouseOver = () => {
-    setIsHovering(true);
-    console.log("hovering");
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-    console.log("not hovering");
-  };
 
   // to update the divs for styling
   return (
@@ -88,7 +77,7 @@ const MultiShopSelection: React.FC<{
     >
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
-          {multiShop.map((item, index) => (
+          {multiShop.map((item) => (
             <>
               <div className="multishop">
                 {/* <div className="multishop-top-wrapper"> */}
@@ -106,22 +95,6 @@ const MultiShopSelection: React.FC<{
                   playItemClickSound={() => playItemClickSound(item.rarity)}
                   hoverStyle="item-hover-multishop"
                 />
-                {/* <img
-                  className="item-image"
-                  key={`${item.id}+${index}`}
-                  src={`public/assets/${item.rarity}/${item.itemName}.webp`}
-                  alt={item.itemName}
-                  onClick={() => {
-                    handleItemSelection(item);
-                    playItemClickSound(item.rarity)
-                  }}
-                  onMouseOver={() => {
-                    playHoverSound();
-                    handleMouseOver()
-                  }}
-                  onMouseOut={handleMouseOut}
-                />
-                {isHovering && <HoverInfo item={item}/>} */}
                 <div className="multishop-bottom"></div>
                 <div className="multishop-bar"></div>
               </div>
