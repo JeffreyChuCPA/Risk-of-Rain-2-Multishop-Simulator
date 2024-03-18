@@ -15,6 +15,7 @@ const SurvivorSelection: React.FC<{
   const [survivorList, setSurvivorList] = useState<Survivor[]>([]); 
   //*to track if in loading state from the API fetch
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  
 
   useEffect(() => {
     //*API fetching survivors

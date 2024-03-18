@@ -24,11 +24,11 @@ export interface Survivor {
   id: string;
   name: string;
   imageLink: string;
-  health: { $numberDecimal: string };
-  healthRegen: { $numberDecimal: string };
-  damage: { $numberDecimal: string };
-  speed: { $numberDecimal: string };
-  armor: { $numberDecimal: string };
+  health: string;
+  healthRegen: string;
+  damage: string;
+  speed: string;
+  armor: string;
   type: string
 }
 
