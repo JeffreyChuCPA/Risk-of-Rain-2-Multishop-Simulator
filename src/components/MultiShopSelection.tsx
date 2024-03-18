@@ -3,6 +3,9 @@ import { AllItems } from "./ItemSelection";
 import { Items, UserSelection, itemRarities } from "../utilities/types";
 import "../styles/items.css";
 import { isEmpty } from "lodash";
+import { playItemClickSound } from "../utilities/fxFunctions";
+import ItemDisplay from "./ItemDisplay";
+// import OnHoverDisplay from "./OnHoverDisplay";
 
 const MultiShopSelection: React.FC<{
   allItems: AllItems;
@@ -10,9 +13,12 @@ const MultiShopSelection: React.FC<{
   userSelection: UserSelection;
   setItemStack: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
+  //*to store the 3 items to show for selection
   const [multiShop, setMultiShop] = useState<Items[]>([]);
 
+
   useEffect(() => {
+    //*to set % chance of item rarity for the 3 items
     const getRandomRarity = (): itemRarities => {
       const randomNumber: number = Math.floor(Math.random() * 100);
       if (randomNumber < 70) {
@@ -24,10 +30,12 @@ const MultiShopSelection: React.FC<{
       }
     };
 
+    //*to set a random index for determining the item to show for the given rarity of items
     const getRandomItemIndex = (itemRarityArray: Items[]): number => {
       return Math.floor(Math.random() * itemRarityArray.length);
     };
 
+    //*to generate 3 random items of a random rarity to display for selection
     const populateMultiShop = (allItems: AllItems): Items[] => {
       const multiShopRarity = getRandomRarity();
       const rolledItems: Items[] = [];
@@ -45,6 +53,7 @@ const MultiShopSelection: React.FC<{
       ? setMultiShop(populateMultiShop(allItems))
       : setMultiShop([]);
 
+    //*to set itemStack state var based on items selected from user in the userSelection state var
     const updateUserItemStack = (
       userSelection: UserSelection
     ): Record<string, number> => {
@@ -60,34 +69,32 @@ const MultiShopSelection: React.FC<{
     setItemStack(updateUserItemStack(userSelection));
   }, [allItems, userSelection]);
 
-  useEffect(() => {
-    console.log(multiShop);
-  }, [multiShop]);
 
   // to update the divs for styling
   return (
-    <div className="container">
+    <div
+      className={userSelection.userItems.length < 15 ? "container" : undefined}
+    >
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
-          {multiShop.map((item, index) => (
+          {multiShop.map((item) => (
             <>
               <div className="multishop">
-              
                 {/* <div className="multishop-top-wrapper"> */}
-                  <div className="multishop-top">
-                    <div className="multishop-sliding-door"></div>
+                <div className="multishop-top">
+                  <div className="multishop-sliding-door"></div>
                   {/* </div> */}
-
                 </div>
                 <div className="multishop-cap"></div>
                 <div className="multishop-cap-tip"></div>
                 <div className="multishop-rectangle"></div>
-                <img
-                  className="item-image"
-                  key={`${item.id}+${index}`}
-                  src={`public/assets/${item.rarity}/${item.itemName}.webp`}
-                  alt={item.itemName}
-                  onClick={() => handleItemSelection(item)}
+                <ItemDisplay
+                  item={item}
+                  className={"item-image"}
+                  handleItemSelection={() => handleItemSelection(item)}
+                  playItemClickSound={() => playItemClickSound(item.rarity)}
+                  hoverStyle="item-hover-multishop"
+                  toSetAnimation={true}
                 />
                 <div className="multishop-bottom"></div>
                 <div className="multishop-bar"></div>

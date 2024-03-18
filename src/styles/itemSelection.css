@@ -1,0 +1,72 @@
+.animation-container {
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  /* background-color: white; */
+  animation: bounce 0.9s forwards;
+  z-index: 5;
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+  }
+  50% {
+    transform: translateY(-120px);
+  }
+  100% {
+    transform: translateY(410px);
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+    display: none;
+  }
+}
+
+.line {
+  position: absolute;
+  width: 10px;
+  /* background-color: white; */
+  top: 100%;
+  left: 100%;
+  bottom: 0;
+  transform-origin: top;
+  animation: lineAnimation 1s forwards;
+  z-index: 5;
+}
+
+@keyframes lineAnimation {
+  0% {
+    height: 0px;
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+    transform: translateY(0);
+  }
+
+  25% {
+    height: 100px;
+  }
+
+  50% {
+    height: 0px;
+    transform: translateY(-100px);
+  }
+
+  70% {
+    height: 390px;
+    /* animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.10); */
+  }
+
+  90% {
+    display: none;
+  }
+
+  100% {
+    height: 440px;
+    animation-timing-function: cubic-bezier(0.23, 0.98, 1, 1.01);
+    display: none;
+  }
+}

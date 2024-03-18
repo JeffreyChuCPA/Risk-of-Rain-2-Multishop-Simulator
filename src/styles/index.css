@@ -2,9 +2,27 @@
   background-color: black;
   color: white;
   font-family: "Bombardier";
+  margin-top: -20px;
 }
 
 @font-face {
   font-family: "Bombardier";
   src: local("Bombardier-Regular"), url("../fonts/Bombardier-Regular.ttf")
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  }
+
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1
+}
+
+.loading {
+  font-size: 2rem;
 }

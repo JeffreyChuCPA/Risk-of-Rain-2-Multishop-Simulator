@@ -1,13 +1,93 @@
-import React from "react";
-import { Items } from "../utilities/types";
+import React, { useEffect, useState } from "react";
+import { Items, UserSelection, itemRarities } from "../utilities/types";
 import "../styles/itemStackDisplay.css";
 import { specialCalcItems } from "../utilities/itemsToRemove";
 import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
+import TopSelectedItems from "./TopSelectedItems";
+import { playHoverSound } from "../utilities/fxFunctions";
+import LoadingDisplay from "./LoadingDisplay";
+
+export type DBItem = {
+  _id: string;
+  count: number;
+  rarity: string;
+  description: string;
+};
+
+export type DBItems = {
+  [itemRarity in itemRarities]: DBItem[];
+};
 
 const StackCalculationDisplay: React.FC<{
   userItemStack: { item: string; count: number; userSelectedItems: Items[] }[];
-}> = ({ userItemStack }) => {
-  //*obtain the per stack values for the item from within the "( )"
+  userSelection: UserSelection;
+}> = ({ userItemStack, userSelection }) => {
+  const [topItems, setTopItems] = useState<DBItems>({
+    Common: [],
+    Uncommon: [],
+    Legendary: []
+  });
+
+  const [topSurvivorItems, setTopSurvivorItems] = useState<DBItems>({
+    Common: [],
+    Uncommon: [],
+    Legendary: []
+  });
+
+  //*to track if in loading state from the API fetch
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const apiURL = process.env.NODE_ENV === 'production'
+    ? 'https://your-heroku-app-url/api'
+    : 'http://localhost:5000';
+
+    const postItems = async (userSelection: UserSelection) => {
+      try {
+        const response = await fetch(`${apiURL}/api/results`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(userSelection)
+        });
+
+        const result = await response.json();
+        console.log("Success", result);
+        getItems(userSelection.userSurvivor.name);
+      } catch (error) {
+        console.error("Error in posting items", error);
+      }
+    };
+
+    const getItems = async (survivor: string) => {
+      try {
+        const response = await fetch(
+          `${apiURL}/api/results/${survivor}`
+        );
+        const results = await response.json();
+        setIsLoading(false);
+
+        setTopItems({
+          Common: results.commonItems,
+          Uncommon: results.uncommonItems,
+          Legendary: results.legendaryItems
+        });
+
+        setTopSurvivorItems({
+          Common: results.commonSurvivorItems,
+          Uncommon: results.uncommonSurvivorItems,
+          Legendary: results.legendarySurvivorItems
+        });
+      } catch (error) {
+        console.error("Error in getting items", error);
+      }
+    };
+
+    postItems(userSelection);
+  }, []);
+
+  //*obtain the per stack values for the item from within the "( )" in the item description
   const getStackValue = (description: string): number[] => {
     const stackStringIndex: number[] = [];
     const perStackValues: number[] = [];
@@ -39,7 +119,7 @@ const StackCalculationDisplay: React.FC<{
     let match: RegExpExecArray | null;
 
     while ((match = regex.exec(description)) !== null) {
-      // We push the first capturing group, which is the number we're interested in
+      // Push the first capturing group, which is the number we're interested in
       itemStatValues.push(parseFloat(match[1]));
     }
 
@@ -49,13 +129,10 @@ const StackCalculationDisplay: React.FC<{
   //*to calculate the new item stat value based on the stack value and stack count of the item for non-special case items
   const getUpdatedItemStat = (item: Items, stack: number): number[] => {
     const itemStackValues: number[] = getStackValue(item.description);
-    // console.log(itemStackValues);
 
     const itemStatValues: number[] = getItemStatValue(item.description);
-    // console.log(itemStatValues);
 
     const updatedStatValue: number[] = [];
-    // console.log(stack, itemStackValues.length);
 
     if (stack > 1) {
       for (let i = 0; i <= itemStatValues.length; i++) {
@@ -63,20 +140,20 @@ const StackCalculationDisplay: React.FC<{
           itemStatValues[i] + itemStackValues[i] * (stack - 1)
         );
       }
-    } else { 
-      itemStatValues.forEach(value => updatedStatValue.push(value))
+    } else {
+      itemStatValues.forEach((value) => updatedStatValue.push(value));
     }
 
     return updatedStatValue;
   };
 
+  //*to update the item description based on the item stack/count based on using regex to find the specific item stat value to replace with the new value
   const updatedItemDescription = (
     item: Items,
     stack: number,
     description: string
   ): string => {
     const updatedItemStats: number[] = getUpdatedItemStat(item, stack);
-    console.log(updatedItemStats);
 
     const regex = /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
     let currentIndex = 0;
@@ -94,37 +171,74 @@ const StackCalculationDisplay: React.FC<{
   };
 
   return (
-    <div className="results-container">
-      {userItemStack.map((item) => {
-        return (
-          <div className="results-itemContainer">
-            <div className="results-itemIcon">
-              <img
-                className="results-item"
-                src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
-                alt={item.item}
-              />
-              <span className="stack-count">
-                {item.count > 1 ? `x${item.count}` : null}
+    <>
+      <div className="results-title">Items Collected <a className="results-github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
+        <img className="results-github-icon" src="public/assets/github-icon.png" title="GitHub" alt="github"/>
+        <span className="results-github-text">GitHub</span>
+        </a></div>
+      <div className="results-container">
+        {userItemStack.map((item) => {
+          return (
+            <div className="results-itemContainer">
+              <div className="results-itemIcon">
+                <img
+                  className="results-item"
+                  src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                  alt={item.item}
+                  onMouseOver={playHoverSound}
+                />
+                <span className="stack-count">
+                  {item.count > 1 ? `x${item.count}` : null}
+                </span>
+              </div>
+              <span className="item-description">
+                {!specialCalcItems.includes(item.item)
+                  ? updatedItemDescription(
+                      item.userSelectedItems[0],
+                      item.count,
+                      item.userSelectedItems[0].description
+                    )
+                  : updatedSpecialCaseItemDescription(
+                      item.userSelectedItems[0],
+                      item.count,
+                      item.userSelectedItems[0].description
+                    )}
               </span>
             </div>
-            <span className="item-description">
-              {!specialCalcItems.includes(item.item)
-                ? updatedItemDescription(
-                    item.userSelectedItems[0],
-                    item.count,
-                    item.userSelectedItems[0].description
-                  )
-                : updatedSpecialCaseItemDescription(
-                    item.userSelectedItems[0],
-                    item.count,
-                    item.userSelectedItems[0].description
-                  )}
-            </span>
+          );
+        })}
+      </div>
+      <div className="fetch-results-title-container">
+        <div className="title-results-container overall">
+          Top 5 Overall Selected Items
+        </div>
+        <div className="title-results-container">
+          Top 5 Selected Items for
+          <img
+            className="results-survivor-image"
+            src={userSelection.userSurvivor.imageLink}
+            alt={`image of ${userSelection.userSurvivor.name}`}
+            onMouseOver={playHoverSound}
+          />
+        </div>
+      </div>
+      <div className="fetch-results-container">
+        {isLoading ? (
+          <LoadingDisplay />
+        ) : (
+          <div className="top-results-container overall">
+            <TopSelectedItems dbItems={topItems} />
           </div>
-        );
-      })}
-    </div>
+        )}
+        {isLoading ? (
+          <LoadingDisplay />
+        ) : (
+          <div className="top-results-container survivor">
+            <TopSelectedItems dbItems={topSurvivorItems} />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

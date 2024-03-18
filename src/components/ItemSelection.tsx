@@ -5,6 +5,7 @@ import urls from "../utilities/urls";
 import MultiShopSelection from "./MultiShopSelection";
 import { isEmpty } from "lodash";
 import StackCalculationDisplay from "./StackCalculationDisplay";
+import { playHoverSound } from "../utilities/fxFunctions";
 
 export type AllItems = {
   [itemRarity in itemRarities]: {
@@ -16,14 +17,17 @@ const ItemSelection: React.FC<{
   handleItemSelection: (item: Items) => void;
   userSelection: UserSelection;
 }> = ({ handleItemSelection, userSelection }) => {
+  //*to store all items of all rarities from API fetch
   const [allItems, setAllItems] = useState<AllItems>({
     Common: { items: [] },
     Uncommon: { items: [] },
     Legendary: { items: [] }
   });
 
+  //*to store items selected and the item stack/count as a hashmap
   const [itemStack, setItemStack] = useState<Record<string, number>>({});
 
+  //*Array used for displaying items selected and stack/count of item
   const userItemStack = Object.entries(itemStack).map(
     ([item, count]): {
       item: string;
@@ -38,9 +42,9 @@ const ItemSelection: React.FC<{
     }
   );
 
-  console.log(userItemStack);
 
   useEffect(() => {
+    //*API fetching items from 3 different endpoints
     const fetchItems = async () => {
       const itemURLS: string[] = [
         urls.commonItemsURL,
@@ -49,7 +53,7 @@ const ItemSelection: React.FC<{
       ];
 
       try {
-        // Use Promise.all to fetch all URLs simultaneously
+        //* Use Promise.all to fetch all URLs simultaneously
         const fetchPromises = itemURLS.map(async (url: string) => {
           const response = await fetch(url);
           if (!response.ok) throw new Error("Failed to retrieve items");
@@ -69,7 +73,7 @@ const ItemSelection: React.FC<{
           };
         });
 
-        // Await all promises and then combine results into the allItems state
+        //*Await all promises and then combine all item results into the allItems state
         const results = await Promise.all(fetchPromises);
 
         setAllItems({
@@ -95,6 +99,7 @@ const ItemSelection: React.FC<{
                 className="item-image selected"
                 src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                 alt={item.item}
+                onMouseOver={playHoverSound}
               />
             ) : (
               <>
@@ -119,9 +124,8 @@ const ItemSelection: React.FC<{
         />
       ) : null}
 
-      {/* to convert below to a new page */}
       {userSelection.userItems.length === 15 ? (        
-        <StackCalculationDisplay userItemStack={userItemStack} />
+        <StackCalculationDisplay userItemStack={userItemStack} userSelection={userSelection}/>
       ) : null}
     </>
   );

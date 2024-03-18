@@ -6,13 +6,14 @@
 }
 
 .items-selected {
-  border: 1px solid #CAC686;
+  border: 2px solid #CAC686;
   background-color: #242424;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   margin: 20px 30px 80px 30px;
   padding: 10px;
+  min-height: 10%;
 }
 
 .selected {
@@ -120,7 +121,7 @@ span {
 
 .multishop-bar {
   width: 9%;
-  height: 50vh;
+  min-height: 24.8vh;
   background-color: blue;
   position: absolute;
   top:100%
@@ -149,6 +150,53 @@ span {
 
 .multishop-closed {
   transform: translateY(50%)
+}
+
+.item-hover {
+  min-width: 300px;
+  max-height: 400px;
+  min-height: 150px;
+  padding: 5px;
+  border: 2px solid #CAC686;
+  background-color: #242424;
+  position:absolute;
+  top: -150px;
+  left: -50px;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-hover-multishop {
+  min-width: 300px;
+  max-height: 400px;
+  min-height: 150px;
+  padding: 5px;
+  border: 2px solid #CAC686;
+  background-color: #242424;
+  position:absolute;
+  top: 0px;
+  left: -70px;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-hover {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.text-hover {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 5px;
 }
 
 @media (max-width: 1339px) {

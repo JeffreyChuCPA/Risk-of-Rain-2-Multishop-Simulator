@@ -3,5 +3,62 @@
   text-align: center;
   padding: 30px;
   background-color: #242424;
-  margin: 20px 30px 80px 30px
+  margin: 20px 30px 80px 30px;
+  position: relative; 
+}
+
+.instructions-title {
+  font-size: 4rem;
+}
+
+.instructions-intro {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.instructions-list {
+  font-size: 2rem;
+}
+
+.instructions-btn {
+  margin-top: 20px;
+  font-size: 2rem;
+  font-family: "Bombardier";
+  clip-path: polygon( 
+  7% 0%, /* top-left corner */
+  94% 0%, /* top-right corner */
+  100% 24%, /* right-top corner */
+  100% 80%, /* right-bottom corner */
+  95% 100%, /* bottom-right corner */
+  20% 100%, /* bottom-left corner */
+  0% 100%, /* left-bottom corner */
+  0% 25% /* left-top corner */);
+  padding-right: 50px;
+  padding-left: 50px;
+  background-color: #418C1F;
+  color: white;
+  border: 2px solid #418C1F
+}
+
+.instructions-btn:hover {
+  background-color: #54b627;
+}
+
+.github-link {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white
+}
+
+.github-icon {
+  width: 30px;
+  margin-right: 5px;
+}
+
+.github-text {
+  margin-top: 3px;;
 }
