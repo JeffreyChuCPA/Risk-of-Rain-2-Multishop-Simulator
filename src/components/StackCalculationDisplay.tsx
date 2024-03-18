@@ -39,7 +39,7 @@ const StackCalculationDisplay: React.FC<{
 
   useEffect(() => {
     const apiURL = process.env.NODE_ENV === 'production'
-    ? 'https://your-heroku-app-url/api'
+    ? 'https://ror2-multishop-terminal-sim-c9943d38df9b.herokuapp.com'
     : 'http://localhost:5000';
 
     const postItems = async (userSelection: UserSelection) => {
