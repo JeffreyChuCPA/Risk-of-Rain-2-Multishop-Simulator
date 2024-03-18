@@ -4,9 +4,6 @@ import ItemDisplay from "./ItemDisplay";
 const TopSelectedItems: React.FC<{
   dbItems: DBItems;
 }> = ({ dbItems }) => {
-
-  
-
   return (
     <>
       {}
@@ -14,7 +11,12 @@ const TopSelectedItems: React.FC<{
         <span>Common</span>
         {dbItems.Common.map((item, index) => (
           <div className="ranked-item">
-            <ItemDisplay item={item} className={"ranked-item-image"} hoverStyle="item-hover"/>
+            <ItemDisplay
+              item={item}
+              className={"ranked-item-image"}
+              hoverStyle="item-hover"
+              toSetAnimation={false}
+            />
             <li key={index}>Total Selected: {item.count} </li>
           </div>
         ))}
@@ -24,7 +26,12 @@ const TopSelectedItems: React.FC<{
         <span>Uncommon</span>
         {dbItems.Uncommon.map((item, index) => (
           <div className="ranked-item">
-            <ItemDisplay item={item} className={"ranked-item-image"} hoverStyle="item-hover"/>
+            <ItemDisplay
+              item={item}
+              className={"ranked-item-image"}
+              hoverStyle="item-hover"
+              toSetAnimation={false}
+            />
             <li key={index}>Total Selected: {item.count} </li>
           </div>
         ))}
@@ -34,7 +41,12 @@ const TopSelectedItems: React.FC<{
         <span>Legendary</span>
         {dbItems.Legendary.map((item, index) => (
           <div className="ranked-item">
-            <ItemDisplay item={item} className={"ranked-item-image"} hoverStyle="item-hover"/>
+            <ItemDisplay
+              item={item}
+              className={"ranked-item-image"}
+              hoverStyle="item-hover"
+              toSetAnimation={false}
+            />
             <li key={index}>Total Selected: {item.count} </li>
           </div>
         ))}

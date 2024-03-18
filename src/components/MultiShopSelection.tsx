@@ -94,6 +94,7 @@ const MultiShopSelection: React.FC<{
                   handleItemSelection={() => handleItemSelection(item)}
                   playItemClickSound={() => playItemClickSound(item.rarity)}
                   hoverStyle="item-hover-multishop"
+                  toSetAnimation={true}
                 />
                 <div className="multishop-bottom"></div>
                 <div className="multishop-bar"></div>
