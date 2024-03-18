@@ -38,9 +38,13 @@ const StackCalculationDisplay: React.FC<{
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const apiURL = process.env.NODE_ENV === 'production'
+    ? 'https://your-heroku-app-url/api'
+    : 'http://localhost:5000';
+
     const postItems = async (userSelection: UserSelection) => {
       try {
-        const response = await fetch("http://localhost:5000/api/results", {
+        const response = await fetch(`${apiURL}/api/results`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -59,7 +63,7 @@ const StackCalculationDisplay: React.FC<{
     const getItems = async (survivor: string) => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/results/${survivor}`
+          `${apiURL}/api/results/${survivor}`
         );
         const results = await response.json();
         setIsLoading(false);
@@ -125,13 +129,10 @@ const StackCalculationDisplay: React.FC<{
   //*to calculate the new item stat value based on the stack value and stack count of the item for non-special case items
   const getUpdatedItemStat = (item: Items, stack: number): number[] => {
     const itemStackValues: number[] = getStackValue(item.description);
-    // console.log(itemStackValues);
 
     const itemStatValues: number[] = getItemStatValue(item.description);
-    // console.log(itemStatValues);
 
     const updatedStatValue: number[] = [];
-    // console.log(stack, itemStackValues.length);
 
     if (stack > 1) {
       for (let i = 0; i <= itemStatValues.length; i++) {
@@ -153,7 +154,6 @@ const StackCalculationDisplay: React.FC<{
     description: string
   ): string => {
     const updatedItemStats: number[] = getUpdatedItemStat(item, stack);
-    console.log(updatedItemStats);
 
     const regex = /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
     let currentIndex = 0;

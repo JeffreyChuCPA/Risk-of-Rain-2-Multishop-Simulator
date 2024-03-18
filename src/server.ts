@@ -3,6 +3,11 @@ const app = express();
 import mongoose from "mongoose";
 import Item from "../models/itemSchema";
 import cors from "cors"
+import dotenv from 'dotenv'
+
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config()
+}
 
 app.use(express.json()) //*body parser middleware
 app.use(cors()) //*allow requests from any origin
@@ -11,8 +16,15 @@ const PORT: string | 5000 = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
+const databaseURL = process.env.DATABASE_URL
+
+if (!databaseURL) {
+  console.error("DATABASE_URL environment variable is not set.");
+  process.exit(1); // Exit the process if DATABASE_URL is not set
+}
+
 mongoose
-  .connect("mongodb://localhost/RoR2-Multishop-Simulator")
+  .connect(databaseURL)
   .then(() => console.log("Connected to Mongodb..."))
   .catch((err) => console.error("Could not connect to Mongodb...", err));
 
@@ -55,7 +67,6 @@ app.get("/api/results/:survivor", async (req, res) => {
   const commonSurvivorItems = await retrieveItems("Common", req.params.survivor);
   const uncommonSurvivorItems = await retrieveItems("Uncommon", req.params.survivor);
   const legendarySurvivorItems = await retrieveItems("Legendary", req.params.survivor);
-  console.log(commonItems);
   
   
   res.send({ commonItems, uncommonItems, legendaryItems, commonSurvivorItems, uncommonSurvivorItems, legendarySurvivorItems });

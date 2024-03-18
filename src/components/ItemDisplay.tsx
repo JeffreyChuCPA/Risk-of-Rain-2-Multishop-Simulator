@@ -75,7 +75,6 @@ const ItemDisplay: React.FC<{
       rarity: item.rarity
     };
     animationRef.current.push(newCircle);
-    console.log(newCircle);
 
     setTimeout(() => {
       newCircle.completed = true;
@@ -84,7 +83,6 @@ const ItemDisplay: React.FC<{
 
   return (
     <>
-      {console.log(item.rarity)}
       <img
         className={`${className} animation-container`}
         src={`public/assets/${item.rarity}/${

@@ -42,7 +42,6 @@ const ItemSelection: React.FC<{
     }
   );
 
-  console.log(userItemStack);
 
   useEffect(() => {
     //*API fetching items from 3 different endpoints
