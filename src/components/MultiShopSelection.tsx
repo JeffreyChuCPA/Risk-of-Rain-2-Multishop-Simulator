@@ -8,7 +8,7 @@ const MultiShopSelection: React.FC<{
   allItems: AllItems;
   handleItemSelection: (item: Items) => void;
   userSelection: UserSelection;
-  setItemStack: React.Dispatch<React.SetStateAction<Record<string, number>>>
+  setItemStack: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
   const [multiShop, setMultiShop] = useState<Items[]>([]);
 
@@ -45,44 +45,54 @@ const MultiShopSelection: React.FC<{
       ? setMultiShop(populateMultiShop(allItems))
       : setMultiShop([]);
 
-    const updateUserItemStack = (userSelection: UserSelection): Record<string, number> => {
+    const updateUserItemStack = (
+      userSelection: UserSelection
+    ): Record<string, number> => {
       const newItemStack: Record<string, number> = {};
 
-      userSelection.userItems.forEach(item => {
+      userSelection.userItems.forEach((item) => {
         newItemStack[item.itemName] = (newItemStack[item.itemName] || 0) + 1;
-      })
+      });
 
-      return newItemStack
-    }
+      return newItemStack;
+    };
 
-    setItemStack(updateUserItemStack(userSelection))
-    
+    setItemStack(updateUserItemStack(userSelection));
   }, [allItems, userSelection]);
 
   useEffect(() => {
     console.log(multiShop);
-    
   }, [multiShop]);
 
+  // to update the divs for styling
   return (
     <div className="container">
       {!isEmpty(multiShop) && (
         <div className="multishop-container">
           {multiShop.map((item, index) => (
-            <div className="multishop">
-              {" "}
-              <div className="multishop-top"></div>
-              <div className="multishop-cap"></div>
-              <img
-                className="item-image"
-                key={`${item.id}+${index}`}
-                src={`public/assets/${item.rarity}/${item.itemName}.webp`}
-                alt={item.itemName}
-                onClick={() => handleItemSelection(item)}
-              />
-              <div className="multishop-bottom"></div>
-              <div className="multishop-bar"></div>
-            </div>
+            <>
+              <div className="multishop">
+              
+                {/* <div className="multishop-top-wrapper"> */}
+                  <div className="multishop-top">
+                    <div className="multishop-sliding-door"></div>
+                  {/* </div> */}
+
+                </div>
+                <div className="multishop-cap"></div>
+                <div className="multishop-cap-tip"></div>
+                <div className="multishop-rectangle"></div>
+                <img
+                  className="item-image"
+                  key={`${item.id}+${index}`}
+                  src={`public/assets/${item.rarity}/${item.itemName}.webp`}
+                  alt={item.itemName}
+                  onClick={() => handleItemSelection(item)}
+                />
+                <div className="multishop-bottom"></div>
+                <div className="multishop-bar"></div>
+              </div>
+            </>
           ))}
         </div>
       )}
