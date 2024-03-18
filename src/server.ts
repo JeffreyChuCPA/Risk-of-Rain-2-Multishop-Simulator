@@ -5,9 +5,9 @@ import Item from "../models/itemSchema";
 import cors from "cors"
 import dotenv from 'dotenv'
 
-if (process.env.NODE_ENV !== 'production') {
-  dotenv.config()
-}
+
+dotenv.config()
+
 
 app.use(express.json()) //*body parser middleware
 app.use(cors()) //*allow requests from any origin
