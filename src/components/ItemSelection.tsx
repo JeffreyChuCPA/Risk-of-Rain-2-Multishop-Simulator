@@ -62,7 +62,7 @@ const ItemSelection: React.FC<{
           return {
             items: data
               .map((item: Items) => ({
-                id: item._id,
+                id: item.id,
                 itemName: item.itemName,
                 rarity: item.rarity,
                 description: item.description,

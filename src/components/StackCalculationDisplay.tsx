@@ -158,7 +158,7 @@ const StackCalculationDisplay: React.FC<{
     const regex = /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
     let currentIndex = 0;
 
-    const replaceFunction = (match: string, p1: string, unitPart: string) => {
+    const replaceFunction = (match: string, _p1: string, unitPart: string) => {
       if (currentIndex < updatedItemStats.length) {
         const newValue: number = updatedItemStats[currentIndex];
         currentIndex++;

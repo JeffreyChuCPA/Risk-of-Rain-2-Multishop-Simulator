@@ -29,7 +29,6 @@ function App() {
   const backgroundArray: string[] = [map1, map2, map3, map4, map5, map7]
   const initialBackground: string = map6
   const [backgroundImage, setBackgroundImage] = useState<string>(initialBackground)
-  console.log(backgroundImage);
   
 
   const backgroundStyle = {
