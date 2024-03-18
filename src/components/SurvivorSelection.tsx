@@ -23,7 +23,11 @@ const SurvivorSelection: React.FC<{
         const response = await fetch(urls.survivorsURL);
         if (response.ok) {
           const data = await response.json();
-          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string, health: string, healthRegen: string, damage:  string, speed: string, armor:  string, type: string}) => ({
+          const survivorData: Survivor[] = data.map( (survivor: {'_id': string, survivorName: string, survivorImage: string,   health: { $numberDecimal: string };
+          healthRegen: { $numberDecimal: string };
+          damage: { $numberDecimal: string };
+          speed: { $numberDecimal: string };
+          armor: { $numberDecimal: string }, type: string}) => ({
             id: survivor._id,
             name: survivor.survivorName,
             imageLink: survivor.survivorImage,

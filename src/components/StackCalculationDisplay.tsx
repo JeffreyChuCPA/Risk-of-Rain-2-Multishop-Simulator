@@ -39,7 +39,7 @@ const StackCalculationDisplay: React.FC<{
 
   useEffect(() => {
     const apiURL = process.env.NODE_ENV === 'production'
-    ? 'https://your-heroku-app-url/api'
+    ? 'https://ror2-multishop-terminal-sim-c9943d38df9b.herokuapp.com'
     : 'http://localhost:5000';
 
     const postItems = async (userSelection: UserSelection) => {
@@ -158,7 +158,7 @@ const StackCalculationDisplay: React.FC<{
     const regex = /(\b\d+\.?\d*)([a-zA-Z%\/]*)(?=\s*\()/g;
     let currentIndex = 0;
 
-    const replaceFunction = (match: string, p1: string, unitPart: string) => {
+    const replaceFunction = (match: string, _p1: string, unitPart: string) => {
       if (currentIndex < updatedItemStats.length) {
         const newValue: number = updatedItemStats[currentIndex];
         currentIndex++;

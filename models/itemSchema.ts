@@ -11,4 +11,4 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model("Item", itemSchema, "selected items");
 
-module.exports = Item
+export default Item
