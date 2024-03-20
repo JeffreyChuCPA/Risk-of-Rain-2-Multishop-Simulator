@@ -1,9 +1,9 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import mongoose from "mongoose";
-import Item from "../models/itemSchema";
-import cors from "cors"
-import dotenv from 'dotenv'
+const mongoose = require("mongoose");
+const Item = require("./models/itemSchema");
+const cors = require("cors");
+const dotenv = require('dotenv');
 
 
 dotenv.config()
@@ -12,7 +12,7 @@ dotenv.config()
 app.use(express.json()) //*body parser middleware
 app.use(cors()) //*allow requests from any origin
 
-const PORT: string | 5000 = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
@@ -48,7 +48,7 @@ app.post("/api/results", async (req, res) => {
 });
 
 app.get("/api/results/:survivor", async (req, res) => {
-  const retrieveItems = async (rarity: string, survivor?: string) => {
+  const retrieveItems = async (rarity, survivor) => {
     const matchStage = survivor ? { $match: { rarity: rarity, survivor: survivor } } : { $match: { rarity: rarity } }
 
     const items = await Item.aggregate([
@@ -70,4 +70,8 @@ app.get("/api/results/:survivor", async (req, res) => {
   
   
   res.send({ commonItems, uncommonItems, legendaryItems, commonSurvivorItems, uncommonSurvivorItems, legendarySurvivorItems });
+
+  app.get('/', (req, res) => {
+    res.send('Server is running.');
+  });
 });

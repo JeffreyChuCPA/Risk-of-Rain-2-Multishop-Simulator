@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema({
   item: {
@@ -11,4 +11,4 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model("Item", itemSchema, "selected items");
 
-export default Item
+module.exports = Item
