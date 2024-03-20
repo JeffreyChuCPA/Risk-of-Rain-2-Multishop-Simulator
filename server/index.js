@@ -8,9 +8,14 @@ const dotenv = require('dotenv');
 
 dotenv.config()
 
+const corsOptions = {
+  origin: process.env.FE_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 
 app.use(express.json()) //*body parser middleware
-app.use(cors()) //*allow requests from any origin
+app.use(cors(corsOptions)) //*allow requests from any origin
 
 const PORT = process.env.PORT || 5000;
 
