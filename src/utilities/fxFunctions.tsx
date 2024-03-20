@@ -1,8 +1,8 @@
-import hover from "../../public/assets/audio/hover.wav"
-import click from "../../public/assets/audio/menuClick.wav"
-import ItemClickCommon from "../../public/assets/audio/itemspawn-Common.wav"
-import ItemClickUncommon from "../../public/assets/audio/itemspawn-Uncommon.wav"
-import ItemClickLegendary from "../../public/assets/audio/itemspawn-Legendary.wav"
+import hover from "/assets/audio/hover.wav"
+import click from "/assets/audio/menuClick.wav"
+import ItemClickCommon from "/assets/audio/itemspawn-Common.wav"
+import ItemClickUncommon from "/assets/audio/itemspawn-Uncommon.wav"
+import ItemClickLegendary from "/assets/audio/itemspawn-Legendary.wav"
 
 export const playHoverSound = () => {
   new Audio(hover).play()

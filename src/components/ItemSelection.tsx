@@ -97,7 +97,7 @@ const ItemSelection: React.FC<{
             item.count <= 1 ? (
               <img
                 className="item-image selected"
-                src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                src={`/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                 alt={item.item}
                 onMouseOver={playHoverSound}
               />
@@ -105,7 +105,7 @@ const ItemSelection: React.FC<{
               <>
                 <img
                   className="item-image selected"
-                  src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                  src={`/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                   alt={item.item}
                 />{" "}
                 <span>x{itemStack[item.item]}</span>

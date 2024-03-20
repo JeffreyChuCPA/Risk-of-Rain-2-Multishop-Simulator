@@ -85,7 +85,7 @@ const ItemDisplay: React.FC<{
     <>
       <img
         className={`${className} animation-container`}
-        src={`public/assets/${item.rarity}/${
+        src={`/assets/${item.rarity}/${
           (item as DBItem)._id || (item as Items).itemName
         }.webp`}
         alt={`${(item as DBItem)._id || (item as Items).itemName}`}

@@ -9,7 +9,7 @@ const Instructions: React.FC<{
     <>
     <div className="instructions">
       <a className="github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
-        <img className="github-icon" src="public/assets/github-icon.png" title="GitHub" alt="github"/>
+        <img className="github-icon" src="/assets/github-icon.png" title="GitHub" alt="github"/>
         <span className="github-text">GitHub</span>
         </a>
       <span className="instructions-title">Multishop Terminal Simulator</span>

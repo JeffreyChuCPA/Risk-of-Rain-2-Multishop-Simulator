@@ -4,13 +4,13 @@ import SurvivorSelection from "./components/SurvivorSelection";
 import { Items, Survivor, UserSelection } from "./utilities/types";
 import Instructions from "./components/Instructions";
 import ItemSelection from "./components/ItemSelection";
-import map1 from '../public/assets/background/map-1.jpg'
-import map2 from '../public/assets/background/map-2.jpg'
-import map3 from '../public/assets/background/map-3.jpg'
-import map4 from '../public/assets/background/map-4.jpg'
-import map5 from '../public/assets/background/map-5.jpg'
-import map6 from '../public/assets/background/map-6.jpg'
-import map7 from '../public/assets/background/map-7.jpg'
+import map1 from '/assets/background/map-1.jpg'
+import map2 from '/assets/background/map-2.jpg'
+import map3 from '/assets/background/map-3.jpg'
+import map4 from '/assets/background/map-4.jpg'
+import map5 from '/assets/background/map-5.jpg'
+import map6 from '/assets/background/map-6.jpg'
+import map7 from '/assets/background/map-7.jpg'
 
 //app level: rendering the individual steps of the flow and nothing else
 function App() {

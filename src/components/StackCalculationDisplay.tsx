@@ -173,7 +173,7 @@ const StackCalculationDisplay: React.FC<{
   return (
     <>
       <div className="results-title">Items Collected <a className="results-github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
-        <img className="results-github-icon" src="public/assets/github-icon.png" title="GitHub" alt="github"/>
+        <img className="results-github-icon" src="/assets/github-icon.png" title="GitHub" alt="github"/>
         <span className="results-github-text">GitHub</span>
         </a></div>
       <div className="results-container">
@@ -183,7 +183,7 @@ const StackCalculationDisplay: React.FC<{
               <div className="results-itemIcon">
                 <img
                   className="results-item"
-                  src={`public/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
+                  src={`/assets/${item.userSelectedItems[0].rarity}/${item.item}.webp`}
                   alt={item.item}
                   onMouseOver={playHoverSound}
                 />
