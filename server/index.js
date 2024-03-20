@@ -71,7 +71,8 @@ app.get("/api/results/:survivor", async (req, res) => {
   
   res.send({ commonItems, uncommonItems, legendaryItems, commonSurvivorItems, uncommonSurvivorItems, legendarySurvivorItems });
 
-  app.get('/', (req, res) => {
-    res.send('Server is running.');
-  });
+});
+
+app.get('/', (req, res) => {
+  res.send('Server is running.');
 });
