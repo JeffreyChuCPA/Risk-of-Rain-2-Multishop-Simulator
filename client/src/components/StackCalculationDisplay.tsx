@@ -44,7 +44,7 @@ const StackCalculationDisplay: React.FC<{
 
     const postItems = async (userSelection: UserSelection) => {
       try {
-        const response = await fetch(`${apiURL}/api/results`, {
+        const response = await fetch(`${apiURL}api/results`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
