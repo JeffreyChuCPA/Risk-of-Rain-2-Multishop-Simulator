@@ -9,7 +9,10 @@ const dotenv = require('dotenv');
 dotenv.config()
 
 const corsOptions = {
-  origin: process.env.FE_URL,
+  // origin: process.env.FE_URL,
+  origin: '*', // Allow requests from any origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
