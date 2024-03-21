@@ -4,7 +4,7 @@ import "../styles/itemStackDisplay.css";
 import { specialCalcItems } from "../utilities/itemsToRemove";
 import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc";
 import TopSelectedItems from "./TopSelectedItems";
-import { playHoverSound } from "../utilities/fxFunctions";
+import { playClickSound, playHoverSound } from "../utilities/fxFunctions";
 import LoadingDisplay from "./LoadingDisplay";
 
 export type DBItem = {
@@ -38,9 +38,10 @@ const StackCalculationDisplay: React.FC<{
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const apiURL = process.env.NODE_ENV === 'production'
-    ? `${import.meta.env.VITE_SERVER_URL}`
-    : 'http://localhost:5000';
+    const apiURL =
+      process.env.NODE_ENV === "production"
+        ? `${import.meta.env.VITE_SERVER_URL}`
+        : "http://localhost:5000";
 
     const postItems = async (userSelection: UserSelection) => {
       try {
@@ -62,9 +63,7 @@ const StackCalculationDisplay: React.FC<{
 
     const getItems = async (survivor: string) => {
       try {
-        const response = await fetch(
-          `${apiURL}/api/results/${survivor}`
-        );
+        const response = await fetch(`${apiURL}/api/results/${survivor}`);
         const results = await response.json();
         setIsLoading(false);
 
@@ -172,10 +171,22 @@ const StackCalculationDisplay: React.FC<{
 
   return (
     <>
-      <div className="results-title">Items Collected <a className="results-github-link" href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator" target="_blank">
-        <img className="results-github-icon" src="/assets/github-icon.png" title="GitHub" alt="github"/>
-        <span className="results-github-text">GitHub</span>
-        </a></div>
+      <div className="results-title">
+        Items Collected{" "}
+        <a
+          className="results-github-link"
+          href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator"
+          target="_blank"
+        >
+          <img
+            className="results-github-icon"
+            src="/assets/github-icon.png"
+            title="GitHub"
+            alt="github"
+          />
+          <span className="results-github-text">GitHub</span>
+        </a>
+      </div>
       <div className="results-container">
         {userItemStack.map((item) => {
           return (
@@ -237,6 +248,15 @@ const StackCalculationDisplay: React.FC<{
             <TopSelectedItems dbItems={topSurvivorItems} />
           </div>
         )}
+      </div>
+      <div className="refresh">
+        <button
+          className="instructions-btn"
+          onMouseOver={() => playHoverSound()}
+          onClick={() => {playClickSound(); window.location.reload()}}
+        >
+          Redeploy
+        </button>
       </div>
     </>
   );

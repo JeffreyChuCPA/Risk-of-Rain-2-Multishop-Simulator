@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./styles/App.css";
 import SurvivorSelection from "./components/SurvivorSelection";
 import { Items, Survivor, UserSelection } from "./utilities/types";
 import Instructions from "./components/Instructions";

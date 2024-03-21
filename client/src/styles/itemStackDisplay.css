@@ -145,3 +145,11 @@
 li {
   list-style-type: none;
 }
+
+.refresh {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
