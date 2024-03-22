@@ -22,3 +22,6 @@ Backend
 ## APIs Used
 - Risk of Rain 2 Web API (https://riskofrain2api.herokuapp.com)
 - Used to fetch game data regarding the Risk of Rain 2 survivors and items
+
+## Source
+- Loading Gup gid (u/technicoledifficulty)
