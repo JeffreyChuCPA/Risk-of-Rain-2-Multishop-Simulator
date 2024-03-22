@@ -24,4 +24,4 @@ Backend
 - Used to fetch game data regarding the Risk of Rain 2 survivors and items
 
 ## Source
-- Loading Gup gid (u/technicoledifficulty)
+- Loading Gup gif (u/technicoledifficulty)
