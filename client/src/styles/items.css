@@ -131,8 +131,7 @@ span {
   border: 2px solid #CAC686;
   background-color: #242424;
   position:absolute;
-  top: -150px;
-  left: -50px;
+  top: -170px;
   z-index: 10;
   text-align: center;
   display: flex;
@@ -149,8 +148,8 @@ span {
   border: 2px solid #CAC686;
   background-color: #242424;
   position:absolute;
-  top: 0px;
-  left: -70px;
+  top: -5%;
+  left: -100%;
   z-index: 10;
   text-align: center;
   display: flex;
