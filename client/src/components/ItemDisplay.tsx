@@ -39,6 +39,12 @@ const ItemDisplay: React.FC<{
     Legendary: "#F36453"
   };
 
+  const itemRarityLineAnimationColor = {
+    Common: "#e8e8e8",
+    Uncommon: "#aeeb83",
+    Legendary: "#ed7264"
+  };
+
   const itemRarityAnimationSizeCircle = {
     Common: "30px",
     Uncommon: "40px",
@@ -142,8 +148,8 @@ const ItemDisplay: React.FC<{
                     ]
                   }px`,
                   backgroundColor:
-                    itemRarityAnimationColor[
-                      circle.rarity as keyof typeof itemRarityAnimationColor
+                  itemRarityLineAnimationColor[
+                      circle.rarity as keyof typeof itemRarityLineAnimationColor
                     ]
                   // height: itemRarityAnimationSizeLine[circle.rarity as keyof typeof itemRarityAnimationSizeLine]
                 }}

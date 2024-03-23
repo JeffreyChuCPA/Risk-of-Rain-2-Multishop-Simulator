@@ -15,7 +15,13 @@ export const playClickSound = () => {
 export const playItemClickSound = (rarity: string) => {
   switch (rarity) {
     case "Common": return new Audio(ItemClickCommon).play()
-    case "Uncommon": return new Audio(ItemClickUncommon).play()
-    case "Legendary": return new Audio(ItemClickLegendary).play()
+    case "Uncommon": {
+      const unCommonAudio = new Audio(ItemClickUncommon)
+      unCommonAudio.volume = 0.9
+      return unCommonAudio.play()}
+    case "Legendary": {
+      const legendaryAudio = new Audio(ItemClickLegendary)
+      legendaryAudio.volume = 0.85
+      return legendaryAudio.play()}
   }
 }

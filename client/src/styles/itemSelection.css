@@ -36,7 +36,7 @@
   bottom: 0;
   transform-origin: top;
   animation: lineAnimation 1s forwards;
-  z-index: 5;
+  z-index: 4;
 }
 
 @keyframes lineAnimation {

@@ -80,10 +80,7 @@ const MultiShopSelection: React.FC<{
           {multiShop.map((item) => (
             <>
               <div className="multishop">
-                {/* <div className="multishop-top-wrapper"> */}
                 <div className="multishop-top">
-                  <div className="multishop-sliding-door"></div>
-                  {/* </div> */}
                 </div>
                 <div className="multishop-cap"></div>
                 <div className="multishop-cap-tip"></div>
