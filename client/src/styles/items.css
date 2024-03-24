@@ -36,9 +36,6 @@ span {
   margin: 0 auto;
 }
 
-/* .multishop-top-wrapper, .multishop-top {
-  box-sizing:border-box;
-} */
 .multishop {
   /* width: 10%; */
   height: 50vh;
@@ -46,12 +43,14 @@ span {
   align-items: center;
   justify-content: center;
   position: relative;
-  margin: 0 20px;
+  margin: 0 90px;
   background-color: #242424;
+  min-width: 105px;
   max-width: 105px;
   border-left: 3px solid blue;
   border-right: 3px solid blue;
   z-index: 1;
+  flex: 1
 }
 
 .multishop-top {
@@ -200,7 +199,6 @@ span {
     min-width: 175px;
   } */
   .multishop {
-    min-width: 105px;
     margin: 0 50px;
   }
   /* .multishop-cap-tip {
