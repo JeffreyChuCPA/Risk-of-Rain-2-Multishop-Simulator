@@ -67,47 +67,12 @@
   margin-left: -20px;
 }
 
-.fetch-results-title-container {
-  display: flex;
-}
-
-.fetch-results-container {
-  display: flex;
-  margin-left: 10px;
-  margin-right: 10px;
-  z-index: -1;
-}
-
-.title-results-container {
-  flex: 1;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 1.5rem;
-  border: 2px solid #5A5865;
-  background-color: #2F2C37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .results-survivor-image {
   border: 1px solid #CAC686;
   border-radius: 1px;
   padding: 2px;
   margin: 8px;
   width: 50px;
-}
-
-.overall {
-  margin-right: 10px;
-}
-
-.survivor {
-  margin-left: 10px;
-  position: relative;
 }
 
 .top-results-container {
@@ -117,7 +82,7 @@
   justify-content: space-evenly;
   border: 1px solid #CAC686;
   padding: 20px;
-  margin-top: 10px;
+  margin: 10px 10px 10px 0;
 }
 
 .ranked-item-rarity {
@@ -152,4 +117,28 @@ li {
   align-items: center;
   margin-bottom: 10px;
   margin-top: -10px;
+}
+
+.new-results-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .sub-container {
+    flex: 1 1 0;
+
+    .title {
+      flex: 1;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 1.5rem;
+      border: 2px solid #5A5865;
+      background-color: #2F2C37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }
