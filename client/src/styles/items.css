@@ -1,5 +1,6 @@
 .item-image {
   width: 70%;
+  max-width: 76px;
   padding: 2px;
   margin: 3px;
   z-index: 1;
@@ -32,34 +33,32 @@ span {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  max-width: 70%;
   margin: 0 auto;
 }
 
 .multishop {
   /* width: 10%; */
+  flex: 0 0 auto;
   height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  margin: 0 90px;
   background-color: #242424;
-  min-width: 105px;
-  max-width: 105px;
   border-left: 3px solid blue;
   border-right: 3px solid blue;
   z-index: 1;
-  flex: 1
+}
+
+.multishop > * {
+  flex: 0 0 auto;
 }
 
 .multishop-top {
-  width: 175px;
   height: 15%;
   position: absolute;
   top: 0%;
   border: 1px solid blue;
-  /* max-width: 175px; */
   background-color: blue;
   display: flex;
   align-items: center;
@@ -67,14 +66,12 @@ span {
 }
 
 .multishop-cap {
-  width: 175px;
   height:15%;
   position: absolute;
   top: -6%;
   border: 1px solid blue;
   border-radius: 40%;
   overflow: hidden;
-  /* max-width: 175px; */
   background-color: blue;
   z-index: 3;
 }
@@ -84,7 +81,6 @@ span {
   border-bottom: 30px solid blue;
 	border-left: 25px solid transparent;
 	border-right: 25px solid transparent;
-	width: 90px;
   top: -8%;
   z-index: 2;
 }
@@ -99,13 +95,11 @@ span {
 }
 
 .multishop-bottom {
-  width: 175px;
   height: 10%;
   position: absolute;
   bottom: -1%;
   border: 1px solid blue;
   border-radius: 0 0 30px 30px;
-  /* max-width: 175px; */
   background-color: blue;
   z-index: 2;
 }
@@ -168,41 +162,55 @@ span {
   margin-right: 5px;
 }
 
-/* @media (max-width: 1339px) {
-
-  .multishop-container {
-    max-width: none;
-  }
-  .multishop {
-    margin: 0 50px;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .multishop-top, .multishop-cap, .multishop-bottom {
+    width: 130%;
   }
 
-  .multishop-top, .multishop-bottom, .multishop-cap {
-    min-width: 175px;
-  }
   .multishop-cap-tip {
-    min-width: 9.5vw;
+    width: 60%;
   }
-} */
+}
 
-/* @media (min-width: 1441px) {
-  .multishop-top, .multishop-bottom, .multishop-cap {
-    max-width: 205px;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .multishop-top, .multishop-cap, .multishop-bottom {
+    width: 160%;
   }
+
+  .multishop-cap-tip {
+    width: 80%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .multishop {
-    max-width: 120px;
+    margin: 0 90px;
   }
-} */
 
-@media (max-width: 768px) {
-  /* .multishop-top, .multishop-bottom, .multishop-cap {
-    min-width: 175px;
-  } */
+  .multishop-top, .multishop-cap, .multishop-bottom {
+    width: 175px;
+  }
+
+  .multishop-cap-tip {
+    width: 90px;;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
   .multishop {
-    margin: 0 50px;
+    margin: 0 90px;
+    width: 105px;
   }
-  /* .multishop-cap-tip {
-    min-width: 12.5vw;
-  } */
 
+  .multishop-top, .multishop-cap, .multishop-bottom {
+    width: 175px;
+  }
+
+  .multishop-cap-tip {
+    width: 90px;;
+  }
 }
