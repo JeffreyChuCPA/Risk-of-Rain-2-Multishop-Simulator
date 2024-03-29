@@ -219,35 +219,34 @@ const StackCalculationDisplay: React.FC<{
           );
         })}
       </div>
-      <div className="fetch-results-title-container">
-        <div className="title-results-container overall">
-          Top 5 Overall Selected Items
+      <div className="new-results-container">
+        <div className="sub-container">
+          <div className="title">Top 5 Overall Selected Items</div>
+          {isLoading ? (
+            <LoadingDisplay />
+          ) : (
+            <div className="top-results-container">
+              <TopSelectedItems dbItems={topItems} />
+            </div>
+          )}
         </div>
-        <div className="title-results-container">
-          Top 5 Selected Items for
-          <img
-            className="results-survivor-image"
-            src={userSelection.userSurvivor.imageLink}
-            alt={`image of ${userSelection.userSurvivor.name}`}
-            onMouseOver={playHoverSound}
-          />
+        <div className="sub-container">
+          <div className="title">Top 5 Selected Items for
+            <img
+              className="results-survivor-image"
+              src={userSelection.userSurvivor.imageLink}
+              alt={`image of ${userSelection.userSurvivor.name}`}
+              onMouseOver={playHoverSound}
+            />
+          </div>
+          {isLoading ? (
+            <LoadingDisplay />
+          ) : (
+            <div className="top-results-container">
+              <TopSelectedItems dbItems={topSurvivorItems} />
+            </div>
+          )}
         </div>
-      </div>
-      <div className="fetch-results-container">
-        {isLoading ? (
-          <LoadingDisplay />
-        ) : (
-          <div className="top-results-container overall">
-            <TopSelectedItems dbItems={topItems} />
-          </div>
-        )}
-        {isLoading ? (
-          <LoadingDisplay />
-        ) : (
-          <div className="top-results-container survivor">
-            <TopSelectedItems dbItems={topSurvivorItems} />
-          </div>
-        )}
       </div>
       <div className="refresh">
         <button
