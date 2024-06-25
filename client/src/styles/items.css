@@ -17,7 +17,7 @@
 }
 
 .selected {
-  width: 5%;
+  width: calc(100% / 20);
   margin: 0 10px;
 }
 
@@ -45,8 +45,8 @@ span {
   position: relative;
   margin: 0 90px;
   background-color: #242424;
-  min-width: 105px;
-  max-width: 105px;
+  min-width: 135px;
+  max-width: 135px;
   border-left: 3px solid blue;
   border-right: 3px solid blue;
   z-index: 1;
@@ -54,12 +54,11 @@ span {
 }
 
 .multishop-top {
-  width: 175px;
+  width: 250px;
   height: 15%;
   position: absolute;
   top: 0%;
   border: 1px solid blue;
-  /* max-width: 175px; */
   background-color: blue;
   display: flex;
   align-items: center;
@@ -67,14 +66,13 @@ span {
 }
 
 .multishop-cap {
-  width: 175px;
+  width: 250px;
   height:15%;
   position: absolute;
   top: -6%;
   border: 1px solid blue;
   border-radius: 40%;
   overflow: hidden;
-  /* max-width: 175px; */
   background-color: blue;
   z-index: 3;
 }
@@ -84,7 +82,7 @@ span {
   border-bottom: 30px solid blue;
 	border-left: 25px solid transparent;
 	border-right: 25px solid transparent;
-	width: 90px;
+	width: 110px;
   top: -8%;
   z-index: 2;
 }
@@ -99,7 +97,7 @@ span {
 }
 
 .multishop-bottom {
-  width: 175px;
+  width: 250px;
   height: 10%;
   position: absolute;
   bottom: -1%;
@@ -112,10 +110,10 @@ span {
 
 .multishop-bar {
   width: 9%;
-  min-height: 24.8vh;
+  height: 49%;
   background-color: blue;
   position: absolute;
-  top:100%
+  top: 100%
 }
 
 .multishop-closed {
@@ -149,7 +147,7 @@ span {
   position:absolute;
   top: -5%;
   left: -80%;
-  z-index: 10;
+  z-index: 20;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -168,41 +166,78 @@ span {
   margin-right: 5px;
 }
 
-/* @media (max-width: 1339px) {
+@media (max-width: 1393px) {
 
   .multishop-container {
-    max-width: none;
+    min-width: 100%;
   }
-  .multishop {
-    margin: 0 50px;
-  }
+}
 
+@media (max-width: 974px) {
+  .multishop {
+    margin: 0 10px;
+    min-width: 100px;
+    max-width: 100px;
+  }
   .multishop-top, .multishop-bottom, .multishop-cap {
-    min-width: 175px;
+    max-width: 175px;
   }
   .multishop-cap-tip {
-    min-width: 9.5vw;
+    width: 90px;
   }
-} */
-
-/* @media (min-width: 1441px) {
-  .multishop-top, .multishop-bottom, .multishop-cap {
-    max-width: 205px;
+  .selected {
+    width: calc(100%/ 15)
   }
-  .multishop {
-    max-width: 120px;
-  }
-} */
-
-@media (max-width: 768px) {
-  /* .multishop-top, .multishop-bottom, .multishop-cap {
-    min-width: 175px;
-  } */
-  .multishop {
-    margin: 0 50px;
-  }
-  /* .multishop-cap-tip {
-    min-width: 12.5vw;
-  } */
 
 }
+
+@media (max-width: 600px) {
+  .multishop {
+    margin: 0;
+    min-width: 70px;
+    max-width: 70px;
+  }
+  .multishop-top, .multishop-bottom, .multishop-cap {
+    max-width: 110px;
+  }
+  .multishop-cap-tip {
+    width: 50px;
+  }
+  .selected {
+    width: calc(100%/ 12)
+  }
+}
+
+@media (max-width: 426px) {
+  .multishop {
+    margin: 0 30px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  .multishop-top, .multishop-bottom, .multishop-cap {
+    max-width: 110px;
+  }
+  .multishop-cap-tip {
+    width: 40px;
+  }
+  .selected {
+    width: calc(100%/ 10)
+  }
+
+}
+
+@media (max-width: 376px) {
+  .multishop {
+    margin: 0 20px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  .multishop-top, .multishop-bottom, .multishop-cap {
+    max-width: 110px;
+  }
+  .multishop-cap-tip {
+    width: 30px;
+  }
+
+}
+

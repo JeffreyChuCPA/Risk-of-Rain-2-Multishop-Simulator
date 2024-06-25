@@ -52,7 +52,7 @@ export const updatedSpecialCaseItemDescription = (
     }
     case specialCalcItems[12]: {
       const chance = Math.round((0.15 * stack) / (0.15 * stack + 1)*100);
-      return `${stack > 1 ? chance: `15%`}% (+15% per stack) chance to block incoming damage. Unaffected by luck.`;
+      return `${stack > 1 ? chance: `15%`} (+15% per stack) chance to block incoming damage. Unaffected by luck.`;
     }
     default:
       return description;

@@ -10,9 +10,10 @@
   src: local("Bombardier-Regular"), url("../fonts/Bombardier-Regular.ttf")
 }
 
-html, body {
+body {
   padding: 0;
   margin: 0;
+  height: 100vh;
   }
 
 
