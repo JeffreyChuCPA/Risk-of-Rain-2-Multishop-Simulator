@@ -21,7 +21,7 @@ Backend
 
 ## APIs Used
 - Risk of Rain 2 Web API (https://riskofrain2api.herokuapp.com)
-- Used to fetch game data regarding the Risk of Rain 2 survivors and items
+  - Used to fetch game data regarding the Risk of Rain 2 survivors and items
 
 ## Source
 - Loading Gup gif (u/technicoledifficulty) (https://www.reddit.com/r/riskofrain/comments/uwdfs5/i_made_a_lil_gup_animation/)
