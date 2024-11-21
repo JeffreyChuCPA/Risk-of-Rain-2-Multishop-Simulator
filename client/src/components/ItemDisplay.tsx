@@ -39,9 +39,9 @@ const ItemDisplay: React.FC<{
       setIsHovering(false);
     },
     {
-      onStart: (event) => setIsHovering(true),
-      onFinish: (event) => setIsHovering(false),
-      onCancel: (event) => setIsHovering(false),
+      onStart: () => setIsHovering(true),
+      onFinish: () => setIsHovering(false),
+      onCancel: () => setIsHovering(false),
       threshold: 5000000,
     }
   );
