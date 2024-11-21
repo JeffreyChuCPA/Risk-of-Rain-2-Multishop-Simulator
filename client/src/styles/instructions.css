@@ -22,6 +22,7 @@
 
 .instructions-btn {
   margin-top: 20px;
+  margin-bottom: 10px;
   font-size: 2rem;
   font-family: "Bombardier";
   clip-path: polygon( 
@@ -61,4 +62,29 @@
 
 .github-text {
   margin-top: 3px;;
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 431px) {
+  .instructions-title {
+    font-size: 3rem;
+  }
+  .instructions-intro {
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+  
+  .instructions-list {
+    font-size: 1rem;
+  }
+  .instructions {
+    margin: 20px 20px 10px 20px;
+    padding-bottom: 10px;
+  }
 }

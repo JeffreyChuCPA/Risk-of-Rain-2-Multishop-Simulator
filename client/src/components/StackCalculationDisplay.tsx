@@ -6,6 +6,7 @@ import { updatedSpecialCaseItemDescription } from "../utilities/specialItemCalc"
 import TopSelectedItems from "./TopSelectedItems";
 import { playClickSound, playHoverSound } from "../utilities/fxFunctions";
 import LoadingDisplay from "./LoadingDisplay";
+import { useMediaQuery } from "react-responsive";
 
 export type DBItem = {
   _id: string;
@@ -36,6 +37,7 @@ const StackCalculationDisplay: React.FC<{
 
   //*to track if in loading state from the API fetch
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const isMobile = useMediaQuery({ query: "(max-width: 805px)" });
 
   useEffect(() => {
     const apiURL =
@@ -176,8 +178,7 @@ const StackCalculationDisplay: React.FC<{
         <a
           className="results-github-link"
           href="https://github.com/JeffreyChuCPA/Risk-of-Rain-2-Multishop-Simulator"
-          target="_blank"
-        >
+          target="_blank">
           <img
             className="results-github-icon"
             src="/assets/github-icon.png"
@@ -219,42 +220,81 @@ const StackCalculationDisplay: React.FC<{
           );
         })}
       </div>
-      <div className="fetch-results-title-container">
-        <div className="title-results-container overall">
-          Top 5 Overall Selected Items
-        </div>
-        <div className="title-results-container">
-          Top 5 Selected Items for
-          <img
-            className="results-survivor-image"
-            src={userSelection.userSurvivor.imageLink}
-            alt={`image of ${userSelection.userSurvivor.name}`}
-            onMouseOver={playHoverSound}
-          />
-        </div>
-      </div>
-      <div className="fetch-results-container">
-        {isLoading ? (
-          <LoadingDisplay />
-        ) : (
-          <div className="top-results-container overall">
-            <TopSelectedItems dbItems={topItems} />
+      {!isMobile && (
+        <>
+          {" "}
+          <div className="fetch-results-title-container">
+            <div className="title-results-container overall">
+              Top 5 Overall Selected Items
+            </div>
+            <div className="title-results-container">
+              Top 5 Selected Items for
+              <img
+                className="results-survivor-image"
+                src={userSelection.userSurvivor.imageLink}
+                alt={`image of ${userSelection.userSurvivor.name}`}
+                onMouseOver={playHoverSound}
+              />
+            </div>
           </div>
-        )}
-        {isLoading ? (
-          <LoadingDisplay />
-        ) : (
-          <div className="top-results-container survivor">
-            <TopSelectedItems dbItems={topSurvivorItems} />
+          <div className="fetch-results-container">
+            {isLoading ? (
+              <LoadingDisplay />
+            ) : (
+              <div className="top-results-container overall">
+                <TopSelectedItems dbItems={topItems} />
+              </div>
+            )}
+            {isLoading ? (
+              <LoadingDisplay />
+            ) : (
+              <div className="top-results-container survivor">
+                <TopSelectedItems dbItems={topSurvivorItems} />
+              </div>
+            )}
+          </div>{" "}
+        </>
+      )}
+      {isMobile && (
+        <>
+          {" "}
+          <div className="title-results-container overall">
+            Top 5 Overall Selected Items
           </div>
-        )}
-      </div>
+          {isLoading ? (
+            <LoadingDisplay />
+          ) : (
+            <div className="top-results-container overall">
+              <TopSelectedItems dbItems={topItems} />
+            </div>
+          )}
+          <div className="title-results-container">
+            Top 5 Selected Items for
+            <img
+              className="results-survivor-image"
+              src={userSelection.userSurvivor.imageLink}
+              alt={`image of ${userSelection.userSurvivor.name}`}
+              onMouseOver={playHoverSound}
+            />
+          </div>
+          {isLoading ? (
+            <LoadingDisplay />
+          ) : (
+            <div className="top-results-container survivor">
+              <TopSelectedItems dbItems={topSurvivorItems} />
+            </div>
+          )}
+        </>
+      )}
+
       <div className="refresh">
         <button
           className="instructions-btn"
           onMouseOver={() => playHoverSound()}
-          onClick={() => {playClickSound(); window.location.reload()}}
-        >
+          onClick={() => {
+            playClickSound();
+            window.location.reload();
+          }}>
           Redeploy
         </button>
       </div>

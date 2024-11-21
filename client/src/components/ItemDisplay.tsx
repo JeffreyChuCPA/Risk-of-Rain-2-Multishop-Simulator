@@ -4,6 +4,7 @@ import { DBItem } from "./StackCalculationDisplay";
 import { playHoverSound } from "../utilities/fxFunctions";
 import HoverInfo from "./OnHoverDisplay";
 import "../styles/itemSelection.css";
+import { useLongPress } from "@uidotdev/usehooks";
 
 interface Circle {
   x: number;
@@ -32,6 +33,18 @@ const ItemDisplay: React.FC<{
 }) => {
   //*to track if item img is hovered on
   const [isHovering, setIsHovering] = useState<boolean>(false);
+  //*to track if item is longheld on mobile
+  const attrs = useLongPress(
+    () => {
+      setIsHovering(false);
+    },
+    {
+      onStart: (event) => setIsHovering(true),
+      onFinish: (event) => setIsHovering(false),
+      onCancel: (event) => setIsHovering(false),
+      threshold: 5000000,
+    }
+  );
 
   const itemRarityAnimationColor = {
     Common: "white",
@@ -90,6 +103,7 @@ const ItemDisplay: React.FC<{
   return (
     <>
       <img
+        {...attrs}
         className={`${className} animation-container`}
         src={`/assets/${item.rarity}/${
           (item as DBItem)._id || (item as Items).itemName
