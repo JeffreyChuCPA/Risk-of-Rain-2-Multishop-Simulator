@@ -48,23 +48,25 @@
   padding: 20px;
   display: flex;
   align-items: center;
-  justify-content:flex-start
+  justify-content:flex-start;
+  gap: 10px;
 }
 
 .results-itemIcon {
   display: flex;
   align-items: center;
   width: 20%;
+  min-width: 50px;
   max-width: 10vw
 }
 .results-item {
-  width: 40%;
-  margin: 20px 40px 20px 20px;
+  width: 50%;
+  margin: 10px 10px 10px 0px;
 }
 
 .stack-count {
-  margin-right: 10px;
-  margin-left: -20px;
+  /* margin-right: 10px;
+  margin-left: -20px; */
 }
 
 .fetch-results-title-container {
@@ -152,4 +154,23 @@ li {
   align-items: center;
   margin-bottom: 10px;
   margin-top: -10px;
+}
+
+@media (max-width: 805px) {
+  .overall {
+    margin-left: 10px;
+  }
+  .survivor {
+    margin-right: 10px;
+  }
+  .top-results-container {
+    padding: 30px 10px
+  }
+  .results-itemContainer {
+    padding: 10px;
+  }
+  .results-item {
+    width: 70%;
+    margin: 10px 3px 10px 0px;
+  }
 }

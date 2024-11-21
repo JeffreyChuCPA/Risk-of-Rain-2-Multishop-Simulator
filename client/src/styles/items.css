@@ -11,7 +11,7 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  margin: 20px 30px 80px 30px;
+  margin: 0px 30px 80px 30px;
   padding: 10px;
   min-height: 10%;
 }
@@ -50,7 +50,7 @@ span {
   border-left: 3px solid blue;
   border-right: 3px solid blue;
   z-index: 1;
-  flex: 1
+
 }
 
 .multishop-top {
@@ -110,10 +110,10 @@ span {
 
 .multishop-bar {
   width: 9%;
-  height: 49%;
+  min-height: 200px;
   background-color: blue;
   position: absolute;
-  top: 100%
+  top: 99%
 }
 
 .multishop-closed {
@@ -145,8 +145,7 @@ span {
   border: 2px solid #CAC686;
   background-color: #242424;
   position:absolute;
-  top: -5%;
-  left: -80%;
+  top: 0;
   z-index: 20;
   text-align: center;
   display: flex;
@@ -176,22 +175,68 @@ span {
 @media (max-width: 974px) {
   .multishop {
     margin: 0 10px;
-    min-width: 100px;
-    max-width: 100px;
+    /* gap: 10px; */
   }
-  .multishop-top, .multishop-bottom, .multishop-cap {
-    max-width: 175px;
-  }
-  .multishop-cap-tip {
-    width: 90px;
-  }
+
   .selected {
     width: calc(100%/ 15)
   }
-
 }
 
-@media (max-width: 600px) {
+@media (max-width: 867px) {
+  .multishop {
+    /* min-width: 70%; */
+    max-width: 300px;
+  }
+
+  .multishop-rectangle {
+    height: 13%;
+    background-color: #242424;
+    z-index: 3;
+    top: 0%;
+  }
+
+  .multishop-top, .multishop-bottom, .multishop-cap {
+    width: 130%;
+  }
+  .multishop-cap-tip {
+    width: 60%;
+  }
+
+  .item-image-rolled {
+    width: 30%;
+    max-width: 150px;
+    margin: 5px;
+  }
+
+  /* .item-image {
+    width: 70%;
+    padding: 2px;
+    margin: 3px;
+    z-index: 1;
+  } */
+}
+
+@media (max-width: 431px) {
+  .multishop {
+    flex-direction: column;
+  }
+  .item-image-rolled {
+    width: 40%;
+    margin: 10px;
+  }
+
+  .selected {
+    width: calc(100%/ 10);
+    margin: 0 5px;
+  }
+
+  .item-hover-multishop {
+    top: -100px
+  }
+}
+
+/* @media (max-width: 600px) {
   .multishop {
     margin: 0;
     min-width: 70px;
@@ -208,23 +253,7 @@ span {
   }
 }
 
-@media (max-width: 426px) {
-  .multishop {
-    margin: 0 30px;
-    min-width: 50px;
-    max-width: 50px;
-  }
-  .multishop-top, .multishop-bottom, .multishop-cap {
-    max-width: 110px;
-  }
-  .multishop-cap-tip {
-    width: 40px;
-  }
-  .selected {
-    width: calc(100%/ 10)
-  }
 
-}
 
 @media (max-width: 376px) {
   .multishop {
@@ -239,5 +268,5 @@ span {
     width: 30px;
   }
 
-}
+} */
 

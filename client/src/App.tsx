@@ -35,7 +35,8 @@ function App() {
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
-    height: "100vh",
+    height: "100%",
+    overflow: 'hidden'
   }
 
   const randomIndex: number = Math.floor(Math.random() * backgroundArray.length)
@@ -68,10 +69,12 @@ function App() {
       {(userSelection.userSurvivor.id === undefined) ? (
         <>
           {" "}
-          <Instructions start={start} setStart={setStart}/>{" "}
-          {start && <SurvivorSelection
-            handleSurvivorSelection={handleSurvivorSelection}
-          />}
+          <div className="intro-container">
+            <Instructions start={start} setStart={setStart}/>{" "}
+            {start && <SurvivorSelection
+              handleSurvivorSelection={handleSurvivorSelection}
+            />}
+          </div>
           
         </>
       ) : <ItemSelection handleItemSelection={handleItemSelection} userSelection={userSelection}/>}

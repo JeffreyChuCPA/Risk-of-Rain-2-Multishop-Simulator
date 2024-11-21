@@ -5,6 +5,8 @@ import "../styles/items.css";
 import { isEmpty } from "lodash";
 import { playItemClickSound } from "../utilities/fxFunctions";
 import ItemDisplay from "./ItemDisplay";
+import { useMediaQuery } from "react-responsive";
+
 // import OnHoverDisplay from "./OnHoverDisplay";
 
 const MultiShopSelection: React.FC<{
@@ -15,7 +17,7 @@ const MultiShopSelection: React.FC<{
 }> = ({ allItems, handleItemSelection, userSelection, setItemStack }) => {
   //*to store the 3 items to show for selection
   const [multiShop, setMultiShop] = useState<Items[]>([]);
-
+  const isMobile = useMediaQuery({ query: "(max-width: 867px)" });
 
   useEffect(() => {
     //*to set % chance of item rarity for the 3 items
@@ -69,38 +71,72 @@ const MultiShopSelection: React.FC<{
     setItemStack(updateUserItemStack(userSelection));
   }, [allItems, userSelection]);
 
+  console.log(isMobile);
 
   // to update the divs for styling
   return (
-    <div
-      className={userSelection.userItems.length < 15 ? "container" : undefined}
-    >
-      {!isEmpty(multiShop) && (
-        <div className="multishop-container">
-          {multiShop.map((item) => (
-            <>
-              <div className="multishop">
-                <div className="multishop-top">
+    <>
+      {!isMobile && (
+        <div
+          className={
+            userSelection.userItems.length < 15 ? "container" : undefined
+          }>
+          {!isEmpty(multiShop) && (
+            <div className="multishop-container">
+              {multiShop.map((item, index) => (
+                <div className="multishop" key={index}>
+                  <div className="multishop-top"></div>
+                  <div className="multishop-cap"></div>
+                  <div className="multishop-cap-tip"></div>
+                  <div className="multishop-rectangle"></div>
+                  <ItemDisplay
+                    item={item}
+                    className={"item-image"}
+                    handleItemSelection={() => handleItemSelection(item)}
+                    playItemClickSound={() => playItemClickSound(item.rarity)}
+                    hoverStyle="item-hover-multishop"
+                    toSetAnimation={true}
+                  />
+                  <div className="multishop-bottom"></div>
+                  <div className="multishop-bar"></div>
                 </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {isMobile && (
+        <div
+          className={
+            userSelection.userItems.length < 15 ? "container" : undefined
+          }>
+          {!isEmpty(multiShop) && (
+            <div className="multishop-container">
+              <div className="multishop">
+                <div className="multishop-top"></div>
                 <div className="multishop-cap"></div>
                 <div className="multishop-cap-tip"></div>
                 <div className="multishop-rectangle"></div>
-                <ItemDisplay
-                  item={item}
-                  className={"item-image"}
-                  handleItemSelection={() => handleItemSelection(item)}
-                  playItemClickSound={() => playItemClickSound(item.rarity)}
-                  hoverStyle="item-hover-multishop"
-                  toSetAnimation={true}
-                />
+                {multiShop.map((item, index) => (
+                  <ItemDisplay
+                    key={index}
+                    item={item}
+                    className={"item-image-rolled"}
+                    handleItemSelection={() => handleItemSelection(item)}
+                    playItemClickSound={() => playItemClickSound(item.rarity)}
+                    hoverStyle="item-hover-multishop"
+                    toSetAnimation={true}
+                  />
+                ))}
                 <div className="multishop-bottom"></div>
                 <div className="multishop-bar"></div>
               </div>
-            </>
-          ))}
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
