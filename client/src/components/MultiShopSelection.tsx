@@ -71,8 +71,6 @@ const MultiShopSelection: React.FC<{
     setItemStack(updateUserItemStack(userSelection));
   }, [allItems, userSelection]);
 
-  console.log(isMobile);
-
   // to update the divs for styling
   return (
     <>
