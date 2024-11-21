@@ -1,5 +1,7 @@
 # Welcome to my Risk of Rain 2 Multishop Terminal Simulator!
 
+https://www.loom.com/share/52a4585a928a44cf9a31519693bcfa50?sid=a8da19fa-7604-4d33-9df0-0f60e8ce4c3b
+
 ## Description
 The web app provides users with the simulated experience of choosing items from the multishop in Risk of Rain 2 for their run. Features include:
 - Selecting your survivor for the simulated run
